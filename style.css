@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+
+html, body {
+    height: 100%; /* Volle Höhe für Flexbox-Zentrierung */
+    margin: 0;    /* Entfernt Standard-Margins */
+}
+
+
+

@@ -1,0 +1,14 @@
+# Ordner ignorieren
+sonstiges/
+
+# Node.js
+node_modules/
+package-lock.json/
+
+# Betriebssystem
+
+
+# IDE/Editor
+
+
+# Umgebungsvariablen

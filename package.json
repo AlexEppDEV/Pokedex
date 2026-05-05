@@ -1,0 +1,15 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "**Ein interaktiver Pokédex, der Daten von der [PokéAPI](https://pokeapi.co/) abruft und Pokémon in einer responsiven Webanwendung anzeigt.**\r *Erstellt als Abgabeprojekt für die Weiterbildung zum Frontend-Web-Developer bei der Developer Akademie.*",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  }
+}
