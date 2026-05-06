@@ -11,4 +11,32 @@ html, body {
 }
 
 
+.app {
+    background-image: url(./assets/img/hintergrundbild-1.jfif) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+header {
+    height: 120px;
+    gap: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 100%;
+    border-style: solid;
+    border-width: 5px;
+
+}
+
+
+.header-logo {
+    height: 64px;
+    width: 64px;
+}

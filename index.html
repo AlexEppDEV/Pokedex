@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIreBase</title>
+    <title>Pokedex</title>
+
+    <link rel="shortcut icon" href="./assets/img/logo.jfif" type="image/x-icon">
     
     <link rel="stylesheet" href="./styles/dpf-flex-utils.css">
     <link rel="stylesheet" href="style.css">
@@ -16,10 +18,56 @@
 
 </head>
 <body class=" dpf-flex-column-center" onload="init()">
-    <div>
+    <div class="app d-flex flex-column  min-vh-100 min-vw-100 ">
+        <header class="min-vw-100 container ">
+            <a class="navbar-brand" href="#">
+                <img src="./assets/img/header-logo.jfif" alt="" class="header-logo">
+            </a>
+            <h1>Pokedex</h1>
+            <!-- <nav class="navbar bg-body-tertiary ">
+                <div class="container dpf-flex-start">
+                    <a class="navbar-brand" href="#">
+                        <img src="./assets/img/header-logo.jfif" alt="" class="header-logo">
+                    </a>
+                    <h1>Pokedex</h1>
+                </div>
+            </nav> -->
+        </header>
+
+        <main>
+            <div class="card border-success mb-3" style="max-width: 18rem;">
+                <div class="card-header bg-transparent border-success">Name Pokemon</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">Name Pokemon</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                </div>
+                <div class="card-footer bg-transparent border-success">Footer</div>
+            </div>
+
+        </main>
+
+        <dialog>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+
         
+        <footer>
+
+        </footer>
+
     </div>
-    
     
     
     
