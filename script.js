@@ -1,16 +1,24 @@
 
-const BASE_URL = "https://remotestorage-5a38a-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://pokeapi.co/api/v2/";
+
+let pokeAPI = {
+
+};
 
 let inputDataTitle = "film";
 let inputData = " Star trek";
 
 function init() {
-    console.log(" Testen firebase")
+    console.log("Testen PokiAPI");
     // fetchDateBase("/name", {"star": "Treck"});
     // postDateBase("/name", {"star": "Treck"});
     // deleteDateBase("/name/",{"serie": "star wars"});
-    putDateBase("/name/Film",{[inputDataTitle] : inputData});
+    // putDateBase("/name/Film",{[inputDataTitle] : inputData});
 };
+
+function allRender() {
+
+}
 
 function userContentInput () {
     let valueKeyInput = document.getElementById("key_input").value;

@@ -14,53 +14,98 @@
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap JS -->
 	<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
 
 
 </head>
 <body class=" dpf-flex-column-center" onload="init()">
-    <div class="app d-flex flex-column  min-vh-100 min-vw-100 ">
-        <header class="min-vw-100 container ">
-            <a class="navbar-brand" href="#">
-                <img src="./assets/img/header-logo.jfif" alt="" class="header-logo">
-            </a>
-            <h1>Pokedex</h1>
-            <!-- <nav class="navbar bg-body-tertiary ">
-                <div class="container dpf-flex-start">
-                    <a class="navbar-brand" href="#">
-                        <img src="./assets/img/header-logo.jfif" alt="" class="header-logo">
-                    </a>
-                    <h1>Pokedex</h1>
-                </div>
-            </nav> -->
-        </header>
+    <div class="app d-flex flex-column min-vh-100 min-vw-100 ">
 
-        <main>
-            <div class="card border-success mb-3" style="max-width: 18rem;">
-                <div class="card-header bg-transparent border-success">Name Pokemon</div>
-                <div class="card-body text-success">
-                    <h5 class="card-title">Name Pokemon</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+        <nav class="navbar bg-body-tertiary min-vw-100">
+            <div class="container-fluid ">
+                <a class="navbar-brand dpf-fs-center" href="#">
+                    <img src="./assets/img/header-logo.jfif" alt="" class="nav-logo">
+                    <h3 style="margin: 0;">Pokedex</h3>
+                </a>               
+                <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+<!-- onclick="dialogOpen() -->
+        <main class="">
+            <div class="card border-success mb-3" style="max-width: 18rem;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="card-header bg-transparent border-success  dpf-sb-center" style="width: 100%;">
+                    <h4>Bulbasaur</h4>
+                    <p class="border rounded-pill px-2 py-1">ID: 1</p>
                 </div>
-                <div class="card-footer bg-transparent border-success">Footer</div>
+                <div class="card-body text-success dpf-sb-center">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="mini-card-img">
+                    <!-- <p class="card-text"></p> -->
+                     <div class="card-body dpf-flex-column-center">
+                        <h5>Type</h5>
+                        <p class="border rounded-pill px-2 py-1">Grass</p>
+                        <p class="border rounded-pill px-2 py-1">Gift</p>
+                     </div>
+                </div>              
             </div>
 
         </main>
 
-        <dialog>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header dpf-sb-center">
+                    <p>#1</p>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Bulbasaur</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body text-success dpf-sb-center">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="mini-card-img">
+                        <!-- <p class="card-text"></p> -->
+                        
                     </div>
-                    <div class="card-footer">
-                        <small class="text-body-secondary">Last updated 3 mins ago</small>
-                    </div>
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="true" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body dpf-flex-column-center">
+                                <h5>Type</h5>
+                                <p class="border rounded-pill px-2 py-1">Grass</p>
+                                <p class="border rounded-pill px-2 py-1">Gift</p>
+                            </div>
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <nav class="buttonBar"> -->
+                        <button class="btn" onclick="imageBack()" aria-label="Image back button" tabindex="0"> < </button>
+                        <!-- <p id="imageNumber" class="pictureNumber" aria-label="Image Number" ></p>                  -->
+                        <button class="btn" onclick="imageBefore()" aria-label="Image Before button" tabindex="0"> > </button>
+                    <!-- </nav> -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
                 </div>
             </div>
-        </dialog>
+        </div>
 
         
         <footer>
@@ -72,5 +117,6 @@
     
     
 </body>
-<script src="./style.css"></script>
+<script src="./script.js"></script>
+<script src="./scripts/dialog.js"></script>
 </html>

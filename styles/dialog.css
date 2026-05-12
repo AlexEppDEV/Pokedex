@@ -1,0 +1,31 @@
+                                            /* DIALOG  */
+dialog {
+    width: 50vw;
+    height: 75vh;
+    background-color:rgb(78, 56, 62);
+    box-sizing: border-box;
+    border-radius: 5%;
+ 
+}
+
+
+dialog.opened {
+    border: 5px solid rgba(13, 87, 31, 0.278);             
+    border-radius: 5%;
+    transform: translateX(0);         
+}
+
+
+dialog::backdrop {
+    opacity: 0;                       
+    background-color: rgba(0, 0, 0, 0.5); 
+    transition: all 1s ease-in;       
+}
+
+
+dialog.opened::backdrop {
+    opacity: 1;                       
+    transition: all 1s ease-in;        
+}
+
+

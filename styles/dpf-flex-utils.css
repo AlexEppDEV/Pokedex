@@ -22,6 +22,27 @@
     align-items: center !important;
 }
 
+.dpf-fs-center {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+.dpf-fe-center {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
+
+.dpf-sb-center {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+
+
+
 /* Ausrichtungs-Klassen für Flex-Richtung */
 .dpf-flex-start {
     display: flex !important;
