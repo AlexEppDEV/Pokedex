@@ -57,58 +57,73 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header dpf-sb-center">
-                    <p>#1</p>
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Bulbasaur</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-body text-success dpf-sb-center">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="mini-card-img">
-                        <!-- <p class="card-text"></p> -->
-                        
+                    <div class="modal-header dpf-sb-center">
+                        <p>#1</p>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Bulbasaur</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="card text-center">
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="true" href="#">Active</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                            </li>
-                            </ul>
+                    <div class="modal-body card">
+                        <div class="card-body text-success dpf-center-x">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="" class="mini-card-img">
+                            <!-- <p class="card-text"></p> -->
+                            
                         </div>
-                        <div class="card-body">
-                            <div class="card-body dpf-flex-column-center">
-                                <h5>Type</h5>
-                                <p class="border rounded-pill px-2 py-1">Grass</p>
-                                <p class="border rounded-pill px-2 py-1">Gift</p>
+                        <div class="card text-center dpf-flex-column-center ">
+
+                            <nav class="dpf-center-x">
+                                <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
+                                    <button class="nav-link" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
+                                    <button class="nav-link" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
+                                    <button class="nav-link" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab" tabindex="0">
+                                    <div class="card-body dpf-flex-column-center">
+                                        <h5>Type</h5>
+                                        <p class="border rounded-pill px-2 py-1">Grass</p>
+                                        <p class="border rounded-pill px-2 py-1">Gift</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
+                                    <p>basic stats</p>
+                                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 25%">25%</div>
+                                    </div>
+                                     <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 50%">50%</div>
+                                    </div>
+                                     <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 75%">75%</div>
+                                    </div>
+                                     <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 90%">90%</div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
+                                    <p>evolution</p>
+                                </div>
+                                <div class="tab-pane fade" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">
+                                    <p>moves</p>
+                                </div>
                             </div>
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <!-- <nav class="buttonBar"> -->
-                        <button class="btn" onclick="imageBack()" aria-label="Image back button" tabindex="0"> < </button>
-                        <!-- <p id="imageNumber" class="pictureNumber" aria-label="Image Number" ></p>                  -->
-                        <button class="btn" onclick="imageBefore()" aria-label="Image Before button" tabindex="0"> > </button>
-                    <!-- </nav> -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <div class="modal-footer dpf-center-x">
+                                        
+                    <button class="btn" onclick="imageBack()" aria-label="Image back button" tabindex="0"> < </button>
+                    <!-- <p id="imageNumber" class="pictureNumber" aria-label="Image Number" ></p>-->
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn" onclick="imageBefore()" aria-label="Image Before button" tabindex="0"> > </button>                   
+                                       
                 </div>
             </div>
         </div>
 
         
         <footer>
+            
 
         </footer>
 
