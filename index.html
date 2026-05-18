@@ -38,9 +38,10 @@
             <div class="card border-success mb-3 poke-mini-card" style=" background-color: #78C850;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="card-header bg-transparent border-success  dpf-sb-center" style="width: 100%;">
                     <h4>Bulbasaur</h4>
-                    <p class="border rounded-pill px-2 py-1">ID: 1</p>
+                    <p class="border rounded-pill px-2 py-1">ID:001</p>
                 </div>
                 <div class="card-body text-success dpf-sb-center">
+                    
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="mini-card-img">
                     
                      <div class="card-body dpf-flex-column-center">
@@ -55,8 +56,8 @@
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content p-3 " >
+            <div class="modal-dialog  dpf-center">
+                <div class="modal-content p-3 dpf-center" >
                     <div class="dpf-fe-center p-2">
                         <button type="button" class="btn-close p-1" style="height: 16px;" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -69,8 +70,7 @@
                         </div>
 
                         <div class="modal-body ">
-                            <div class="card-body text-success dpf-center border rounded-top" style="height: 200px;">
-                                
+                            <div class="card-body text-success dpf-center border rounded-top modal-img" style="height: 200px; background-image: url(./assets/img/backgrund-img/grass.jpg) ;">
                                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="modal-card-img">  
                             </div>
                             <div class="card text-center dpf-flex-column-center rounded-top-0 p-2" style="height: 256px;">
@@ -85,157 +85,144 @@
                                 </nav>
                                 <div class="tab-content vh-100" id="nav-tabContent">
 
-                                    <div class="tab-pane fade show active " id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab" tabindex="0">
-                                        <div class="card-body dpf-flex-column-center">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">Type</th>
-                                                        <td>Grass, Gift</td>
-                                                    </tr>
+                                    <div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+                                        <div class="d-flex flex-column gap-2 p-2">
+                                            <!-- Typen -->
+                                            <div class="d-flex gap-2">
+                                            <span class="fw-bold">Type:</span>
+                                            <div class="d-flex gap-1">
+                                                <p class="border rounded-pill px-2 py-1 mb-0">Grass</p>
+                                                <p class="border rounded-pill px-2 py-1 mb-0">Poison</p>
+                                            </div>
+                                            </div>
 
-                                                    <tr>
-                                                        <th scope="row">Height</th>
-                                                        <td>0.7 m</td>
-                                                    </tr>
+                                            <!-- Größe -->
+                                            <div class="d-flex justify-content-between">
+                                            <span class="fw-bold">Height:</span>
+                                            <span>0.7 m</span>
+                                            </div>
 
-                                                    <tr>
-                                                        <th scope="row">Weight</th>
-                                                        <td>6.9 kg</td>
-                                                    </tr>
+                                            <!-- Gewicht -->
+                                            <div class="d-flex justify-content-between">
+                                            <span class="fw-bold">Weight:</span>
+                                            <span>6.9 kg</span>
+                                            </div>
 
-                                                    <tr>
-                                                        <th scope="row">Description</th>
-                                                        <td>"A strange seed was planted on its back at birth.</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
+                                            <!-- Beschreibung -->
+                                            <div class="d-flex flex-column">
+                                            <span class="fw-bold">Description:</span>
+                                            <p class="mb-0">"A strange seed was planted on its back at birth.</p>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
                                         
+                                            <div class="d-flex flex-column gap-2 p-2">
+                                                <!-- HP -->
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="fw-bold" style="width: 60px;">HP:</span>
+                                                    <span>45</span>
+                                                    <div class="progress flex-grow-1" style="height: 20px;">
+                                                        <div class="progress-bar bg-success" style="width: 45%">45%</div>
+                                                    </div>
+                                                </div>
 
-                                        <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">HP</th>
-                                                        <td>45</td> 
-                                                        
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 25%">25%</div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                <!-- Attack -->
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="fw-bold" style="width: 60px;">Attack:</span>
+                                                    <span>49</span>
+                                                    <div class="progress flex-grow-1" style="height: 20px;">
+                                                        <div class="progress-bar bg-danger" style="width: 49%">49%</div>
+                                                    </div>
+                                                </div>
 
-                                                    <tr>
-                                                        <th scope="row">Attack</th>
-                                                        <td>49</td>                                   
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 50%">50%</div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                <!-- Defense -->
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="fw-bold" style="width: 60px;">Sp.Atk:</span>
+                                                    <span>65</span>
+                                                    <div class="progress flex-grow-1" style="height: 20px;">
+                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
+                                                    </div>
+                                                </div>
 
-                                                    <tr>
-                                                        <th scope="row">Defense</th>
-                                                        <td>49
-                                                        </td>
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 50%">50%</div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="fw-bold" style="width: 60px;">Sp.Def:</span>
+                                                    <span>65</span>
+                                                    <div class="progress flex-grow-1" style="height: 20px;">
+                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
+                                                    </div>
+                                                </div>
 
-                                                    <tr>
-                                                        <th scope="row">Sp.Atk</th>
-                                                        <td>65 </td>                                                 
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 50%">50%</div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="fw-bold" style="width: 60px;">speed:</span>
+                                                    <span>45</span>
+                                                    <div class="progress flex-grow-1" style="height: 20px;">
+                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
+                                                    </div>
+                                                </div>
 
-                                                    <tr>
-                                                        <th scope="row">Sp.Def</th>
-                                                        <td>65</td>                           
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 90%">90%</div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">speed</th>
-                                                        <td>45</td>
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 90%">90%</div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">Total</th>
-                                                        <td>318</td>                                                       
-                                                        <td>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar" style="width: 90%">90%</div>
-                                                            </div>
-                                                            
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-
-
-                                       
-                                        
-                                        
-                                        
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="fw-bold" style="width: 60px;">Total:</span>
+                                                    <span>318</span>
+                                                    <div class="progress flex-grow-1" style="height: 20px;">
+                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
+                                                    </div>
+                                                </div>
+                                            </div> 
                                     </div>
-
+                                    <!-- evolution tab rutscht noch muss anpassen -->
                                     <div class="tab-pane fade" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
-                                        <p>evolution</p>
+                                        <div class="d-flex flex-column gap-3 p-2">
+                                            <div class="dpf-center gap-3 rounded p-2">
+                                                <div class=" dpf-flex-column-center">
+                                                    <p class="mb-0 fw-bold">Basic</p>
+                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                                                        alt="Bulbasaur" class="img-fluid" style="width: 48px;">
+                                                    <p class="mb-0 fw-bold">#001 Bulbasaur</p>
+                                                    <p class="mb-0 fw-bold"> Level 16</p>
+                                                </div>→
+                                                <div class=" dpf-flex-column-center">
+                                                    <p class="mb-0 fw-bold">Phase 1</p>
+                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+                                                        alt="Ivysaur" class="img-fluid" style="width: 48px;">
+                                                    <p class="mb-0 fw-bold">#002 Ivysaur</p>
+                                                    <p class="mb-0 fw-bold"> Level 32</p>
+                                                </div>→
+
+                                                <div class=" dpf-flex-column-center">
+                                                    <p class="mb-0 fw-bold">Phase 2</p>
+                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+                                                        alt="Ivysaur" class="img-fluid" style="width: 48px;">
+                                                    <p class="mb-0 fw-bold">#003 Venusaur</p>
+                                                    <p class="mb-0 fw-bold"> Max. Level</p>
+                                                </div>
+
+                                        </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">
                                         
-                                        <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">Name</th>
-                                                        <td>Vine Whip</td>
-                                                    </tr>
+                                       
+                                        <div class="d-flex flex-column gap-2 p-2">
+                                        <!-- Move 1 -->
+                                        <div class="border rounded p-2">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="fw-bold">Vine Whip</span>
+                                                <span class="badge bg-success">Grass</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-1">
+                                                <span>Power: 35</span>
+                                                <span>PP: 25</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span>Accuracy: 100%</span>
+                                            </div>
+                                        </div>
 
-                                                    <tr>
-                                                        <th scope="row">Type</th>
-                                                        <td>Grass</td>
-                                                    </tr>
+                                        <!-- Weitere Moves hier einfügen -->
+                                        </div>
 
-                                                    <tr>
-                                                        <th scope="row">Power</th>
-                                                        <td>35</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">Accuracy</th>
-                                                        <td>100%</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">PP</th>
-                                                        <td>25</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                     </div>
                                 </div>
                             </div>                       
@@ -253,17 +240,11 @@
                 </div>
             </div>
         </div>
-
-        
         <footer>
             
 
         </footer>
-
-    </div>
-    
-    
-    
+    </div>    
 </body>
 <script src="./script.js"></script>
 <script src="./scripts/dialog.js"></script>

@@ -75,3 +75,9 @@ main {
 th, td, tr {
     padding: 0.25rem !important;
 }
+
+.modal-img {
+    background-size: cover;
+    background-position: center;
+   background-repeat: no-repeat;
+}
