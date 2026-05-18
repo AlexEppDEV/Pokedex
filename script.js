@@ -1,5 +1,6 @@
 
 const BASE_URL = "https://pokeapi.co/api/v2/";
+let modalPokemonImg = "3";
 
 let pokeAPI = {
 
