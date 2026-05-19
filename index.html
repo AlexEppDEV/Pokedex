@@ -25,7 +25,7 @@
             <div class="container-fluid ">
                 <a class="navbar-brand dpf-fs-center" href="#">
                     <img src="./assets/img/header-logo.jfif" alt="" class="nav-logo">
-                    <h3 style="margin: 0;">Pokedex</h3>
+                    <h3 class="m-0">Pokedex</h3>
                 </a>               
                 <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -37,17 +37,17 @@
         <main class="hero p-3">
             <div class="card border-success mb-3 poke-mini-card" style=" background-color: #78C850;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="card-header bg-transparent border-success  dpf-sb-center" style="width: 100%;">
-                    <h4>Bulbasaur</h4>
-                    <p class="border rounded-pill px-2 py-1">ID:001</p>
+                    <h4 class="fw-bold">Bulbasaur</h4>
+                    <p class="border rounded-pill px-2 py-1 fw-bold">#001</p>
                 </div>
                 <div class="card-body text-success dpf-sb-center">
                     
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="mini-card-img">
                     
                      <div class="card-body dpf-flex-column-center">
-                        <h5>Type</h5>
-                        <p class="border rounded-pill px-2 py-1">Grass</p>
-                        <p class="border rounded-pill px-2 py-1">Gift</p>
+                        <h5 class="fw-bold">Type</h5>
+                        <p class="border rounded-pill px-2 py-1 fw-bold">Grass</p>
+                        <p class="border rounded-pill px-2 py-1 fw-bold">Gift</p>
                      </div>
                 </div>              
             </div>
@@ -56,17 +56,17 @@
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog  dpf-center">
-                <div class="modal-content p-3 dpf-center" >
+            <div class="modal-dialog  dpf-center ">
+                <div class="modal-content p-3 dpf-center " >
                     <div class="dpf-fe-center p-2">
                         <button type="button" class="btn-close p-1" style="height: 16px;" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <section class="card border rounded-3 border-5" style=" background-color: #78C850;">
+                    <section class="card border rounded-3 border-5 w-100 h-100" style=" background-color: #78C850;">
                         <div class="modal-header dpf-sb-center">
                             <p class="border rounded-pill px-2 py-1"> <b>BASIC</b> </p>                          
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Bulbasaur</h1>
-                            <p class="border rounded-pill px-2 py-1">#001</p>                           
+                            <p class="border rounded-pill px-2 py-1 fw-bold">#001</p>                           
                         </div>
 
                         <div class="modal-body ">
@@ -76,149 +76,151 @@
                             <div class="card text-center dpf-flex-column-center rounded-top-0 p-2" style="height: 256px;">
 
                                 <nav class="dpf-center-x">
-                                    <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                                    <div class="nav nav-tabs d-flex " id="nav-tab" role="tablist">
                                         <button class="nav-link active" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
                                         <button class="nav-link" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
                                         <button class="nav-link" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
                                         <button class="nav-link" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
                                     </div>
                                 </nav>
-                                <div class="tab-content vh-100" id="nav-tabContent">
+                                <div class="tab-content d-flex flex-column vh-100 w-100 m-0" id="nav-tabContent">
 
-                                    <div class="tab-pane fade show active" id="nav-about" role="tabpanel">
-                                        <div class="d-flex flex-column gap-2 p-2">
+                                    <div class="tab-pane fade show active w-100" id="nav-about" role="tabpanel">
+                                        <div class="d-flex flex-column gap-2 px-3 py-2 w-100">
                                             <!-- Typen -->
-                                            <div class="d-flex gap-2">
-                                            <span class="fw-bold">Type:</span>
-                                            <div class="d-flex gap-1">
-                                                <p class="border rounded-pill px-2 py-1 mb-0">Grass</p>
-                                                <p class="border rounded-pill px-2 py-1 mb-0">Poison</p>
-                                            </div>
+                                            <div class="dpf-sb-center gap-2">
+                                                <p class="fw-bold">Type:</p>
+                                                <div class="d-flex gap-1">
+                                                    <p class="border rounded-pill px-1 py-1 m-0">Grass</p>
+                                                    <p class="border rounded-pill px-1 py-1 m-0">Poison</p>
+                                                </div>
                                             </div>
 
                                             <!-- Größe -->
-                                            <div class="d-flex justify-content-between">
-                                            <span class="fw-bold">Height:</span>
-                                            <span>0.7 m</span>
+                                            <div class="dpf-sb-center gap-1">
+                                                <p class="fw-bold">Height:</p>
+                                                <p>0.7 m</p>
                                             </div>
 
                                             <!-- Gewicht -->
-                                            <div class="d-flex justify-content-between">
-                                            <span class="fw-bold">Weight:</span>
-                                            <span>6.9 kg</span>
+                                            <div class="dpf-sb-center gap-1">
+                                                <p class="fw-bold">Weight:</p>
+                                                <p>6.9 kg</p>
                                             </div>
 
                                             <!-- Beschreibung -->
-                                            <div class="d-flex flex-column">
-                                            <span class="fw-bold">Description:</span>
-                                            <p class="mb-0">"A strange seed was planted on its back at birth.</p>
+                                            <div class="d-flex flex-column gap-1">
+                                                <p class="fw-bold">Description:</p>
+                                                <p class="mb-0">"A strange seed was planted on its back at birth.</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
+                                    <!-- Basec stats -->
+                                    <div class="tab-pane fade w-100" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
                                         
-                                            <div class="d-flex flex-column gap-2 p-2">
-                                                <!-- HP -->
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="fw-bold" style="width: 60px;">HP:</span>
-                                                    <span>45</span>
-                                                    <div class="progress flex-grow-1" style="height: 20px;">
-                                                        <div class="progress-bar bg-success" style="width: 45%">45%</div>
-                                                    </div>
+                                        <div class="dpf-flex-column-start gap-2 px-3 py-2 w-100">
+                                            <!-- HP -->
+                                            <div class="dpf-fs-center gap-2 w-100">
+                                                <p class="fw-bold text-start" style="width: 60px;">HP:</p>
+                                                <p class=" " style="width: 30px;"> 45</p>
+                                                <div class="progress flex-grow-1" style="height: 10px;">
+                                                    <div class="progress-bar bg-success" style="width: 45%">45%</div>
                                                 </div>
+                                            </div>
 
-                                                <!-- Attack -->
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="fw-bold" style="width: 60px;">Attack:</span>
-                                                    <span>49</span>
-                                                    <div class="progress flex-grow-1" style="height: 20px;">
-                                                        <div class="progress-bar bg-danger" style="width: 49%">49%</div>
-                                                    </div>
+                                            <!-- Attack -->
+                                            <div class="d-flex align-items-center gap-2 w-100">
+                                                <p class="fw-bold text-start" style="width: 60px;">Attack:</p>
+                                                <p style="width: 30px;"> 49</p>
+                                                <div class="progress flex-grow-1" style="height: 10px;">
+                                                    <div class="progress-bar bg-danger" style="width: 49%">49%</div>
                                                 </div>
+                                            </div>
 
-                                                <!-- Defense -->
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="fw-bold" style="width: 60px;">Sp.Atk:</span>
-                                                    <span>65</span>
-                                                    <div class="progress flex-grow-1" style="height: 20px;">
-                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
-                                                    </div>
+                                            <!-- Defense -->
+                                            <div class="d-flex align-items-center gap-2 w-100">
+                                                <p class="fw-bold text-start" style="width: 60px;">Sp.Atk:</p>
+                                                <p style="width: 30px;"> 65</p>
+                                                <div class="progress flex-grow-1" style="height: 10px;">
+                                                    <div class="progress-bar bg-warning" style="width: 49%">49%</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="fw-bold" style="width: 60px;">Sp.Def:</span>
-                                                    <span>65</span>
-                                                    <div class="progress flex-grow-1" style="height: 20px;">
-                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
-                                                    </div>
+                                            <div class="d-flex align-items-center gap-2 w-100">
+                                                <p class="fw-bold text-start" style="width: 60px;">Sp.Def:</p>
+                                                <p style="width: 30px;"> 65</p>
+                                                <div class="progress flex-grow-1" style="height: 10px;">
+                                                    <div class="progress-bar bg-warning" style="width: 49%">49%</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="fw-bold" style="width: 60px;">speed:</span>
-                                                    <span>45</span>
-                                                    <div class="progress flex-grow-1" style="height: 20px;">
-                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
-                                                    </div>
+                                            <div class="d-flex align-items-center gap-2 w-100">
+                                                <p class="fw-bold text-start" style="width: 60px;">speed:</p>
+                                                <p style="width: 30px;"> 45</p>
+                                                <div class="progress flex-grow-1" style="height: 10px;">
+                                                    <div class="progress-bar bg-warning" style="width: 49%">49%</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="fw-bold" style="width: 60px;">Total:</span>
-                                                    <span>318</span>
-                                                    <div class="progress flex-grow-1" style="height: 20px;">
-                                                        <div class="progress-bar bg-warning" style="width: 49%">49%</div>
-                                                    </div>
+                                            <div class="d-flex align-items-center gap-2 w-100">
+                                                <p class="fw-bold text-start" style="width: 60px;">Total:</p>
+                                                <p style="width: 30px;">318</p>
+                                                <div class="progress flex-grow-1" style="height: 10px;">
+                                                    <div class="progress-bar bg-warning" style="width: 49%">49%</div>
                                                 </div>
-                                            </div> 
+                                            </div>
+                                        </div> 
                                     </div>
-                                    <!-- evolution tab rutscht noch muss anpassen -->
+
+
+                                    <!-- evolution -->
                                     <div class="tab-pane fade" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
-                                        <div class="d-flex flex-column gap-3 p-2">
+                                        <div class="d-flex flex-column gap-2 px-3 py-2">
                                             <div class="dpf-center gap-3 rounded p-2">
                                                 <div class=" dpf-flex-column-center">
                                                     <p class="mb-0 fw-bold">Basic</p>
                                                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
                                                         alt="Bulbasaur" class="img-fluid" style="width: 48px;">
-                                                    <p class="mb-0 fw-bold">#001 Bulbasaur</p>
-                                                    <p class="mb-0 fw-bold"> Level 16</p>
+                                                    <p class="mb-0 ">#001 Bulbasaur</p>
+                                                    <p class="mb-0 "> Level 16</p>
                                                 </div>→
                                                 <div class=" dpf-flex-column-center">
                                                     <p class="mb-0 fw-bold">Phase 1</p>
                                                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
                                                         alt="Ivysaur" class="img-fluid" style="width: 48px;">
-                                                    <p class="mb-0 fw-bold">#002 Ivysaur</p>
-                                                    <p class="mb-0 fw-bold"> Level 32</p>
+                                                    <p class="mb-0 ">#002 Ivysaur</p>
+                                                    <p class="mb-0 "> Level 32</p>
                                                 </div>→
 
                                                 <div class=" dpf-flex-column-center">
                                                     <p class="mb-0 fw-bold">Phase 2</p>
                                                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
                                                         alt="Ivysaur" class="img-fluid" style="width: 48px;">
-                                                    <p class="mb-0 fw-bold">#003 Venusaur</p>
-                                                    <p class="mb-0 fw-bold"> Max. Level</p>
+                                                    <p class="mb-0 ">#003 Venusaur</p>
+                                                    <p class="mb-0 "> Max. Level</p>
                                                 </div>
-
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">
-                                        
-                                       
-                                        <div class="d-flex flex-column gap-2 p-2">
-                                        <!-- Move 1 -->
-                                        <div class="border rounded p-2">
-                                            <div class="d-flex justify-content-between">
-                                                <span class="fw-bold">Vine Whip</span>
-                                                <span class="badge bg-success">Grass</span>
+                                    <!-- Moves -->
+                                    <div class="tab-pane fade" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">   
+                                        <div class="d-flex flex-column gap-2 px-3 py-2">
+                                            <!-- Move 1 -->
+                                            <div class="px-3">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="fw-bold">Vine Whip</p>
+                                                    <p class="badge bg-success">Grass</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-1">
+                                                    <p>Power: 35</p>
+                                                    <p>PP: 25</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>Accuracy: 100%</p>
+                                                </div>
                                             </div>
-                                            <div class="d-flex justify-content-between mt-1">
-                                                <span>Power: 35</span>
-                                                <span>PP: 25</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>Accuracy: 100%</span>
-                                            </div>
-                                        </div>
 
                                         <!-- Weitere Moves hier einfügen -->
                                         </div>
@@ -229,13 +231,11 @@
                         </div>
                         
                     </section>
-                    <div class="modal-footer dpf-center-x border-0 p-1">
-                                                
+                    <div class="modal-footer dpf-center-x border-0 p-1">                                      
                         <button class="btn" onclick="imageBack()" aria-label="Image back button" tabindex="0"> < </button>
                         <!-- <p id="imageNumber" class="pictureNumber" aria-label="Image Number" ></p>-->
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn" onclick="imageBefore()" aria-label="Image Before button" tabindex="0"> > </button>                   
-                                            
+                        <button class="btn" onclick="imageBefore()" aria-label="Image Before button" tabindex="0"> > </button>                                                              
                     </div>
                 </div>
             </div>
