@@ -14,6 +14,11 @@
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap JS -->
 	<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS -->
+     <script src="./scripts/assets.js"></script>
+     <script src="./scripts/template.js"></script>
+     
     
 
 
@@ -65,7 +70,7 @@
                         <button type="button" class="btn-close p-1" style="height: 16px;" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <section class="card border rounded-3 border-5 w-100 h-100" style=" background-color: #78C850;">
+                    <section class="card border rounded-3 border-5 w-100 h-100" style="background-color: #78C850;">
                         <div class="modal-header dpf-sb-center">
                             <p class="border rounded-pill px-2 py-1 m-0"> 
                                 <img src="./assets/icons/pokemon-type-icons-main/grass.svg" alt="" class="type-logo-mini"> 
@@ -82,11 +87,11 @@
                             <div class="card text-center dpf-flex-column-center rounded-top-0 p-2" style="height: 256px;">
 
                                 <nav class="dpf-center-x">
-                                    <div class="nav nav-tabs d-flex " id="nav-tab" role="tablist">
-                                        <button class="nav-link active" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
-                                        <button class="nav-link" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
-                                        <button class="nav-link" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
-                                        <button class="nav-link" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
+                                    <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
+                                        <button class="nav-link active text-dark fw-bold" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
+                                        <button class="nav-link text-secondary fw-bold" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
+                                        <button class="nav-link text-secondary fw-bold" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
+                                        <button class="nav-link text-secondary fw-bold" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
                                     </div>
                                 </nav>
                                 <div class="tab-content d-flex flex-column vh-100 w-100 m-0" id="nav-tabContent">
@@ -125,7 +130,7 @@
                                     <!-- Basec stats -->
                                     <div class="tab-pane fade w-100" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
                                         
-                                        <div class="dpf-flex-column-start gap-2 px-3 py-2 w-100">
+                                        <div class="dpf-flex-column-start gap-1 px-3 py-2 w-100">
                                             <!-- HP -->
                                             <div class="dpf-fs-center gap-2 w-100">
                                                 <p class="fw-bold text-start" style="width: 60px;">HP:</p>

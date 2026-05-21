@@ -1,3 +1,5 @@
+
+// pokemon type:Color and background Img
 const colorBackgroundImage = {
         normal: {
             color: '#A8A878',
@@ -72,3 +74,6 @@ const colorBackgroundImage = {
             backgroundImage: 'background-img-fairy.png'
         }
     };
+
+
+    

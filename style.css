@@ -104,3 +104,21 @@ th, td, tr {
     margin: 0;
 }
 
+
+/* Inaktive Tabs: text-secondary */
+.nav-tabs .nav-link {
+  color: #6c757d !important; /* Bootstrap's $secondary-Farbe */
+  border-color: #78C850 !important;
+  /* border: 2px !important; */
+} 
+
+/* Aktive Tabs: text-dark */
+.nav-tabs .nav-link.active {
+  color: #212529 !important; /* Bootstrap's $dark-Farbe */
+  border-color: #78C850 !important;
+    
+  border-bottom: 0 !important;
+ 
+
+}
+
