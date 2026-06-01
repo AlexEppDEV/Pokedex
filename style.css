@@ -84,7 +84,8 @@ main {
 }
 
 .poke-mini-card {
-    max-width: 18rem;
+    height: 16rem !important;
+    width: 16rem !important;
     color: black !important;
     /* padding: ; */
 }

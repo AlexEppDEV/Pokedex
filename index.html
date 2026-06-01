@@ -10,14 +10,17 @@
     <link rel="stylesheet" href="./styles/dpf-flex-utils.css">
     <link rel="stylesheet" href="style.css">
 
+     <!-- JS -->
+     <script src="./scripts/assets.js"></script>
+     <script src="./scripts/template.js"></script>
+    <!-- <script src="./script.js"></script> -->
+
     <!-- Bootstrap CSS -->
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap JS -->
 	<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JS -->
-     <script src="./scripts/assets.js"></script>
-     <script src="./scripts/template.js"></script>
+   
      
     
 
@@ -40,8 +43,8 @@
         </nav>
 
         <!-- mini karten ansicht -->
-        <main class="hero p-3">
-            <div class="card border-success mb-3 poke-mini-card" style=" background-color: #78C850;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <main class="d-flex flex-wrap gap-3 p-3 overflow-y-auto" id="mini_card">
+            <!-- <div class="card border-success mb-3 poke-mini-card" style=" background-color: #78C850;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="card-header bg-transparent border-success  dpf-sb-center w-100">
                     <h5 class="fw-bold m-0">Bulbasaur</h5>
                     <p class="border rounded-pill px-2 py-1 fw-bold m-0">#001</p>
@@ -51,14 +54,14 @@
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" class="mini-card-img">
                     
                      <div class="card-body dpf-sb-center gap-2">
-                        <!-- <h5 class="fw-bold">Type</h5> -->
+                        
                         <img src="./assets/icons/pokemon-type-icons-main/grass.svg" alt="" class="type-logo p-1">
 
                         <p class="border rounded-pill px-2 py-1 fw-bold  m-0">Grass</p>
                         <p class="border rounded-pill px-2 py-1 fw-bold  m-0">Gift</p>
                      </div>
                 </div>              
-            </div>
+            </div> -->
 
         </main>
 
@@ -258,5 +261,5 @@
     </div>    
 </body>
 <script src="./script.js"></script>
-<script src="./scripts/dialog.js"></script>
+<!-- <script src="./scripts/dialog.js"></script> -->
 </html>
