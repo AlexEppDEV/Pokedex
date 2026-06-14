@@ -31,9 +31,7 @@ nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    /* border-bottom: 100%;
-    border-style: solid;
-    border-width: 5px; */
+
 
 }
 
@@ -88,7 +86,13 @@ main {
     height: 16rem !important;
     width: 16rem !important;
     color: black !important;
-    /* padding: ; */
+    
+}
+
+.poke-mini-card:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 
