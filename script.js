@@ -1,22 +1,18 @@
 
 
-let startLimitUrl = 30;
-let baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=30&offset=0";
+let startLimitUrl = 20;
+let baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${startLimitUrl}&offset=0`;
 
-let defaultPokeIndex = [
+let defaultPokeIndex = [];
 
-];
+let defaultPokeData = [];
 
-let defaultPokeData = [
+let modalPokeData = [];
 
-];
-
-let modalPokeData = [
-
-];
 let modalId = 0;
 
 async function init() {
+    // let startLimitUrl = 20;
     await fetchDateBase();
     await renderMiniCard();
 
@@ -31,7 +27,7 @@ async function init() {
     });
 };
 
-async function fetchDateBase() {
+async function fetchDateBase(startLimitUrl) {
     let response = await fetch(baseUrl);
     let responseAsJson = await response.json();
 
@@ -136,12 +132,12 @@ function filterTypes(pokemon) {
 
   if (pokemon.types.length === 1) {
     pokemonTypes = `
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0"style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize"style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
     `;
   } else {
     pokemonTypes = `     
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0" style="background-color: ${colorBackgroundImage[type2].color};"> ${type2}</p>
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type2].color};"> ${type2}</p>
     `;
   }
   return pokemonTypes
@@ -154,17 +150,12 @@ function filterTypes(pokemon) {
 async function EvolutionSpecies(pokemon, dataSpecies) {
   try {
     let evolutionData = await fetchEvolutionChain(dataSpecies);
-
     let evolutionLineData = [];
     let current = evolutionData.chain;
-
     while (current) {
-      // ID aus der URL extrahieren
+      
       let urlParts = current.species.url.split('/');
       let evolutionId = parseInt(urlParts[urlParts.length - 2]);
-      // console.log(evolutionId);
-
-      // Bild-URL abrufen
       let pokemonData = await fetchPokemon(evolutionId);
 
       evolutionLineData.push({
@@ -198,7 +189,7 @@ function pokemonBefore () {
     modalId = indexNumber;
     pokemonId = indexNumber.toString();
     renderModalCard(pokemonId);
-}
+};
 
 
 function pokemonBack () {
@@ -213,7 +204,24 @@ function pokemonBack () {
     modalId = indexNumber;
     pokemonId = indexNumber.toString();
     renderModalCard(pokemonId);
-}
+};
+
+
+ async function morePokemon () {
+  try {
+    startLimitUrl = startLimitUrl + 10;
+    baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${startLimitUrl}&offset=0`;
+    defaultPokeIndex = [];
+    defaultPokeData = [];
+    await init();
+
+  }
+  
+  catch (error) {
+    console.error('morePokemon button error:', error);
+  }
+
+};
 // vorlagen ----------------------------------------------
 
 

@@ -96,9 +96,9 @@ main {
 }
 
 
-th, td, tr {
+/* th, td, tr {
     padding: 0.25rem !important;
-}
+} */
 
 .modal-img {
     background-size: cover;
@@ -108,6 +108,10 @@ th, td, tr {
 
 .tab-content p {
     margin: 0;
+}
+
+.capitalize {
+  text-transform: capitalize; /* Macht den ersten Buchstaben jedes Wortes groß */
 }
 
 
@@ -122,9 +126,8 @@ th, td, tr {
 .nav-tabs .nav-link.active {
   color: #212529 !important; /* Bootstrap's $dark-Farbe */
   border-color: #78C850 !important;
-    
   border-bottom: 0 !important;
- 
-
 }
+
+
 

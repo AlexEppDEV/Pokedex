@@ -8,7 +8,7 @@ function miniCardTypeOne (pokemonCard, pokemonTypeColor) {
                 data-id="${pokemonCard.id}">
 
                 <div class="card-header bg-transparent border-success  dpf-sb-center w-100">
-                    <h5 class="fw-bold m-0">${pokemonCard.name}</h5>
+                    <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>
                     <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemonCard.id}</p>
                 </div>
                 <div class="card-body text-success dpf-flex-column-center w-100">
@@ -33,7 +33,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
     let maxStat = 255;
     let maxStatTotal = 720;
     let typesHtml = filterTypes(pokemon);
-    console.log(pokemon.moves[0])
+    // console.log(pokemon.moves[0])
 
     return `
         <div class="dpf-fe-center p-2 ">
@@ -46,7 +46,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                 <img src="./assets/icons/pokemon-type-icons-main/${pokemon.types[0].type.name}.svg" alt="" class="type-logo-mini border rounded-pill px-0 py-0 m-0">                                
                 <div class="dpf-sb-center">
                     <button class="btn" onclick="pokemonBack()" aria-label="Image back button" tabindex="0"> < </button>                 
-                    <h1 class="modal-title fs-5 m-0" id="exampleModalLabel">${pokemon.name}</h1>
+                    <h1 class="modal-title fs-5 m-0 capitalize" id="exampleModalLabel">${pokemon.name}</h1>
                     <button class="btn" onclick="pokemonBefore()" aria-label="Image Before button" tabindex="0"> > </button>
                 </div>
                 <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemon.id}</p>                           
@@ -74,7 +74,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                                 <div class="dpf-sb-center gap-2">
                                     <p class="fw-bold">Type:</p>
                                     <div class="d-flex gap-1">
-                                            ${typesHtml}
+                                        ${typesHtml}
                                         
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                         <div class="tab-pane fade w-100" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
                             
                             <div class="dpf-flex-column-start gap-1 px-3 py-2 w-100 lh-1">
-                                <!-- HP -->
+                               
                                 <div class="dpf-fs-center gap-1 w-100">
                                     <p class="fw-bold text-start" style="width: 70px;">HP:</p>
                                     <p class=" " style="width: 30px;"> ${pokemon.stats[0].base_stat}</p>
@@ -112,7 +112,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                                     </div>
                                 </div>
 
-                                <!-- Attack -->
+                                
                                 <div class="d-flex align-items-center gap-1 w-100">
                                     <p class="fw-bold text-start" style="width: 70px;">Attack:</p>
                                     <p style="width: 30px;"> ${pokemon.stats[1].base_stat}</p>
@@ -121,7 +121,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                                     </div>
                                 </div>
 
-                                <!-- Defense -->
+                                
                                 <div class="d-flex align-items-center gap-1 w-100">
                                     <p class="fw-bold text-start" style="width: 70px;">Defense:</p>
                                     <p style="width: 30px;"> ${pokemon.stats[2].base_stat}</p>
@@ -130,7 +130,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                                     </div>
                                 </div>
 
-                                    <!-- Defense -->
+                                    
                                 <div class="d-flex align-items-center gap-1 w-100">
                                     <p class="fw-bold text-start" style="width: 70px;">Sp.Atk:</p>
                                     <p style="width: 30px;"> ${pokemon.stats[3].base_stat}</p>
@@ -181,7 +181,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
                                 <!-- Move 1 -->
                                 <div class="px-3 pt-3">
                                     <div class="d-flex justify-content-between">
-                                        <p class="fw-bold">${pokemon.moves[0].move.name}</p>
+                                        <p class="fw-bold capitalize">${pokemon.moves[0].move.name}</p>
                                         <p class="badge bg-success">type muss rein</p>
                                     </div>
                                     <div class="d-flex justify-content-between mt-1">
@@ -195,7 +195,7 @@ function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionC
 
                                 <div class="px-3 pt-1">
                                     <div class="d-flex justify-content-between">
-                                        <p class="fw-bold">${pokemon.moves[1].move.name}</p>
+                                        <p class="fw-bold capitalize">${pokemon.moves[1].move.name}</p>
                                         <p class="badge bg-success">Grass</p>
                                     </div>
                                     <div class="d-flex justify-content-between mt-1">
@@ -226,7 +226,7 @@ function templateEvolutionSpecies(evolutionLineData) {
           <img src="${evolutionLineData[index].imageUrl}"
               alt="${evolutionLineData[index].name}" class="img-fluid" style="width: 48px;">
           <p class="mb-0 ">#${evolutionLineData[index].id}</p>
-          <p class="mb-0 ">${evolutionLineData[index].name}</p>
+          <p class="mb-0 capitalize">${evolutionLineData[index].name}</p>
           <p class="mb-0 ">Level: ${evolutionLineData[index].level}</p>
       </div>`;
       templateEvolution += template;
