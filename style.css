@@ -5,6 +5,9 @@
     font-size: 16px;
     color: black !important;
 }
+#loader {
+  z-index: 2000 !important;
+}
 
 
 html, body {
@@ -25,14 +28,13 @@ html, body {
     flex-direction: column;
 }
 
+
 nav {
     height: 120px;
     gap: 24px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
-
 }
 
 
@@ -42,22 +44,24 @@ nav {
     width: 64px;
 }
 
+
 .type-logo {
     border-radius: 20px;
     height: 40px;
     width: 40px;
     object-fit: cover;
     object-position: center;
-
 }
+
+
 .type-logo-mini {
     border-radius: 12px;
     height: 24px;
     width: 24px;
     object-fit: cover;
     object-position: center;
-
 }
+
 
 main {
     width: 100%;
@@ -68,12 +72,14 @@ main {
     align-items: center;
 }
 
+
 .mini-card-img {
     width: 96px;
     height: 96px;
     object-fit: cover;
     object-position: center;
 }
+
 
 .modal-card-img {
     width: 128px;
@@ -82,12 +88,13 @@ main {
     object-position: center;
 }
 
+
 .poke-mini-card {
     height: 16rem !important;
     width: 16rem !important;
     color: black !important;
-    
 }
+
 
 .poke-mini-card:hover {
     transform: scale(1.1); 
@@ -96,19 +103,17 @@ main {
 }
 
 
-/* th, td, tr {
-    padding: 0.25rem !important;
-} */
-
 .modal-img {
     background-size: cover;
     background-position: center;
    background-repeat: no-repeat;
 }
 
+
 .tab-content p {
     margin: 0;
 }
+
 
 .capitalize {
   text-transform: capitalize; /* Macht den ersten Buchstaben jedes Wortes groß */
@@ -119,8 +124,8 @@ main {
 .nav-tabs .nav-link {
   color: #6c757d !important; /* Bootstrap's $secondary-Farbe */
   border-color: #78C850 !important;
-  /* border: 2px !important; */
 } 
+
 
 /* Aktive Tabs: text-dark */
 .nav-tabs .nav-link.active {
@@ -130,4 +135,17 @@ main {
 }
 
 
+/* Logo-Stil und Animation */
+.loader-logo {
+  width: 100px; /* Anpassen an dein Logo */
+  height: 100px;
+  border-radius: 50px;
+  animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
