@@ -14,8 +14,6 @@ async function init() {
         card.addEventListener('click', async function() {
             let pokemonId = this.getAttribute('data-id');
             modalId = Number(pokemonId);
-
-            // Modal mit den Daten füllen
             await renderModalCard(pokemonId);
         });
     });
@@ -76,7 +74,12 @@ async function renderModalCard(pokemonId) {
      document.getElementById("loader").classList.replace("d-none", "d-flex");
     let modalCard =  " ";
     let pokemon = await fetchPokemon(pokemonId);
+     console.log(pokemon)
     let dataSpecies = await fetchSpecies(pokemonId);
+    let moveData = await fetchMoveDetails(pokemon);
+    console.log(moveData);
+    let movesDataTemplate = templateMoves(moveData);
+    
 
     let primaryType = pokemon.types[0].type.name;
     let descriptionText = descriptionData(dataSpecies);
@@ -84,7 +87,7 @@ async function renderModalCard(pokemonId) {
     
     // Farbe aus deinem colorBackgroundImage-Objekt holen
     let pokemonTypeColor = colorBackgroundImage[primaryType].color;
-    modalCard = templateModalCard(pokemon,pokemonTypeColor,descriptionText,evolutionChain);
+    modalCard = templateModalCard(pokemon,pokemonTypeColor,descriptionText,evolutionChain,movesDataTemplate);
     document.getElementById("modal_card").innerHTML = modalCard;
 
   }
@@ -149,6 +152,27 @@ async function fetchEvolutionChain(dataSpecies) {
 };
 
 
+// fetch pokeAPI Moves
+async function fetchMoveDetails(pokemon) {
+  try {
+    let moveMaxNumber = 3 ;
+    let movesDetails = [ ];
+    for (let index = 0; index < moveMaxNumber; index++) {
+      
+      let dataMoveUrl = pokemon.moves[index].move.url;
+      console.log(dataMoveUrl)
+      let response = await fetch(dataMoveUrl);
+      let data = await response.json();
+      movesDetails.push(data) ;
+    }
+    return movesDetails;
+  } catch (error) {
+    console.error("Error fetchMoveDetails:", error);
+    return null;
+  }
+};
+
+
 function filterTypes(pokemon) {
   let pokemonTypes = '';
   let type1 = pokemon.types[0].type.name;
@@ -167,7 +191,6 @@ function filterTypes(pokemon) {
 };
 
 
-// die se funktion muss noch angepasst werden und ein gebaut werden
 async function EvolutionSpecies(pokemon, dataSpecies) {
   try {
     let evolutionData = await fetchEvolutionChain(dataSpecies);
@@ -182,14 +205,14 @@ async function EvolutionSpecies(pokemon, dataSpecies) {
         id: evolutionId,
         name: current.species.name,
         level: current.evolution_details?.[0]?.min_level || 1,
-        imageUrl: pokemonData.sprites.front_default // Kleine Auflösung
+        imageUrl: pokemonData.sprites.front_default 
       });
-      current = current.evolves_to[0]; // Nächste Evolution
+      current = current.evolves_to[0];
     }
     let evolutionLineTemplate = templateEvolutionSpecies(evolutionLineData);
     return evolutionLineTemplate;
   } catch (error) {
-    console.error('Fehler bei Evolution:', error);
+    console.error('Error EvolutionSpecies:', error);
   }
 };
 
@@ -209,7 +232,6 @@ function pokemonBefore () {
      catch (error) {
     console.error('Error in pokemonBefore:', error);
   }
-
     finally {
     document.getElementById("loader").classList.replace("d-flex", "d-none");
   }   
@@ -255,24 +277,26 @@ function pokemonBack () {
     document.getElementById("loader").classList.replace("d-flex", "d-none");
   }   
 };
+
+
+async function basePokemon () {
+  try {
+    document.getElementById("loader").classList.replace("d-none", "d-flex");
+    startLimitUrl = 20;
+    baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${startLimitUrl}&offset=0`;
+    defaultPokeIndex = [];
+    defaultPokeData = [];
+    await init();
+  }
+  catch (error) {
+    console.error('morePokemon button error:', error);
+  }
+  finally {
+    document.getElementById("loader").classList.replace("d-flex", "d-none");
+  }   
+};
 // vorlagen ----------------------------------------------
 
-
-
-async function getMoves(pokemon) {
-  
-    // let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-    // let data = await response.json();
-    let pokemonMoves = pokemon;
-
-    let moves = data.moves.slice(0, 3).map(move => ({
-      name: move.move.name,
-      power: move.move.power || null,
-      accuracy: move.move.accuracy || null
-    }));
-    return moves;
- 
-}
 
 function testLoader() {
   // Ladesymbol anzeigen

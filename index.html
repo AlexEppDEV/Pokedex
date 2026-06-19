@@ -13,7 +13,6 @@
      <!-- JS -->
      <script src="./scripts/assets.js"></script>
      <script src="./scripts/template.js"></script>
-    <!-- <script src="./script.js"></script> -->
 
     <!-- Bootstrap CSS -->
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,11 +22,9 @@
 </head>
 <body class=" dpf-flex-column-center" onload="init()">
     <div class="app d-flex flex-column min-vh-100 min-vw-100 ">
-        <!-- Ladebildschirm (mit Bootstrap-Klassen für Positionierung) -->
         <div id="loader" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-black bg-opacity-50 d-none">
         <img src="./assets/img/logo.jfif" alt="Ladeanimation" class="loader-logo">
         </div>
-
         <nav class="navbar bg-body-tertiary min-vw-100">
             <div class="container-fluid ">
                 <a class="navbar-brand dpf-fs-center" href="#">
@@ -40,29 +37,19 @@
                 </form>
             </div>
         </nav>
-
-        <!-- mini karten ansicht -->
         <main class="d-flex flex-wrap gap-3 p-3 overflow-y-auto" id="mini_card">
-
         </main>
-
-
-        <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog  dpf-center ">
-                <div class="modal-content p-3 dpf-center " id="modal_card" >
-                   
+                <div class="modal-content dpf-center " id="modal_card" >             
                 </div>
             </div>
-        </div>
-       
+        </div>      
         <footer class="gap-3 p-3">
             <div>
-                <button class="btn  btn-success" onclick="morePokemon()" aria-label="Image back button" tabindex="0"> More Pokemon +10</button>
-                <button onclick="testLoader()">Ladebildschirm testen</button>
+                <button class="btn  btn-success" onclick="morePokemon()" aria-label="Image back button" tabindex="0"> More +10</button>
+                <button class="btn  btn-success" onclick="basePokemon()" aria-label="Image back button" tabindex="0"> Base Stack</button>
             </div>
-            
-
         </footer>
     </div>    
 </body>
