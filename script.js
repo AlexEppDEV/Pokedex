@@ -43,6 +43,7 @@ async function fetchDateBase(startLimitUrl) {
 
 
 async function renderMiniCard() {
+  console.log("🔄 Mini-Cards werden neu gerendert!"); // Debugging
   try {
     document.getElementById("loader").classList.replace("d-none", "d-flex");
     let miniCard =  " ";
@@ -74,13 +75,12 @@ async function renderModalCard(pokemonId) {
      document.getElementById("loader").classList.replace("d-none", "d-flex");
     let modalCard =  " ";
     let pokemon = await fetchPokemon(pokemonId);
-     console.log(pokemon)
+    //  console.log(pokemon)
     let dataSpecies = await fetchSpecies(pokemonId);
     let moveData = await fetchMoveDetails(pokemon);
-    console.log(moveData);
+    // console.log(moveData);
     let movesDataTemplate = templateMoves(moveData);
     
-
     let primaryType = pokemon.types[0].type.name;
     let descriptionText = descriptionData(dataSpecies);
     let evolutionChain = await EvolutionSpecies(pokemon, dataSpecies);
@@ -89,7 +89,8 @@ async function renderModalCard(pokemonId) {
     let pokemonTypeColor = colorBackgroundImage[primaryType].color;
     modalCard = templateModalCard(pokemon,pokemonTypeColor,descriptionText,evolutionChain,movesDataTemplate);
     document.getElementById("modal_card").innerHTML = modalCard;
-
+    let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    modal.show();
   }
   catch (error) {
     console.error('Error in renderModalCard:', error);
@@ -115,11 +116,15 @@ function descriptionData(dataSpecies) {
 async function fetchPokemon(pokemonId) {
   try {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+    if (!response.ok) {
+      throw new Error(`Pokémon mit ID/Name "${pokemonId}" nicht gefunden.`);
+    }
     let dataPokemon = await response.json();
     return dataPokemon;
   }
    catch (error) {
     console.error('Erro fetch PokeAPI:', error);
+    throw error; // WICHTIG: Fehler weiterleiten, damit renderModalCard() ihn fängt!
   } 
 };
 
@@ -160,7 +165,6 @@ async function fetchMoveDetails(pokemon) {
     for (let index = 0; index < moveMaxNumber; index++) {
       
       let dataMoveUrl = pokemon.moves[index].move.url;
-      console.log(dataMoveUrl)
       let response = await fetch(dataMoveUrl);
       let data = await response.json();
       movesDetails.push(data) ;
@@ -179,7 +183,7 @@ function filterTypes(pokemon) {
   let type2 = pokemon.types[1]?.type.name;
   if (pokemon.types.length === 1) {
     pokemonTypes = `
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize"style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
     `;
   } else {
     pokemonTypes = `     
@@ -295,6 +299,32 @@ async function basePokemon () {
     document.getElementById("loader").classList.replace("d-flex", "d-none");
   }   
 };
+
+ async function searchPokemon() {
+  try {
+    // 1. Wert aus dem Suchfeld auslesen
+    let searchTerm = document.getElementById('search_Input').value.trim().toLowerCase();
+    if (!searchTerm) {
+      alert('Bitte gib einen Pokémon-Namen oder eine ID ein!');
+      return;
+    }
+
+    // 2. Modal-Lader anzeigen
+    document.getElementById("loader").classList.replace("d-none", "d-flex");
+
+    // 3. Pokémon-Daten abrufen und Modal rendern
+    await renderModalCard(searchTerm);
+
+  } catch (error) {
+    console.error('Fehler in searchPokemon:', error);
+    alert(`Pokémon nicht gefunden: ${error.message}`);
+  } finally {
+    // 4. Lader ausblenden (auch bei Fehlern!)
+    document.getElementById("loader").classList.replace("d-flex", "d-none");
+  }
+  
+}
+
 // vorlagen ----------------------------------------------
 
 

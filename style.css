@@ -55,9 +55,17 @@ nav {
 
 
 .type-logo-mini {
-    border-radius: 12px;
+    border-radius: 16px;
     height: 32px;
     width: 32px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.type-logo-mini-move {
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
     object-fit: cover;
     object-position: center;
 }

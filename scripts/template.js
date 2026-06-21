@@ -171,13 +171,17 @@ function templateEvolutionSpecies(evolutionLineData) {
 };
 
 function templateMoves(moveData) {
-    let template = '';
     let templateData = '';
-    for (let index = 0; index < moveData.length; index++) {
-    
-        template = ` 
+    let moveType = " ";
+    for (let index = 0; index < moveData.length; index++) { 
+        moveType = moveData[index].type.name;
+        templateData += ` 
             <div class=" px-3 pt-2">
-                <p class="fw-bold capitalize text-start">${moveData[index].name}</p>
+                <div class="dpf-flex-start mt-1" >
+                    <img src="./assets/icons/pokemon-type-icons-main/${moveType}.svg" alt="${moveType}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
+                    <p class="fw-bold capitalize p-1 px-2" >${moveData[index].name}</p>
+                    
+                </div>
                 <div class="dpf-sb-center mt-1">
                     <p>Power: ${moveData[index].power || '—'}</p>
                     <p>PP: ${moveData[index].pp || '—'}</p>
@@ -185,9 +189,6 @@ function templateMoves(moveData) {
                 </div>
             </div>
         `;
-    templateData += template;
-
   }
   return templateData
-
-}
+};
