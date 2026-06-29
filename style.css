@@ -5,18 +5,34 @@
     font-size: 16px;
     color: black !important;
 }
+
+
 #loader {
   z-index: 2000 !important;
 }
 
 
+.position-relative {
+    height: 0; 
+}
+
+#error_message {
+    z-index: 1050; 
+    font-size: 0.8rem;
+}
+
+
 html, body {
-    height: 100%; /* Volle Höhe für Flexbox-Zentrierung */
-    margin: 0;    /* Entfernt Standard-Margins */
+    height: 100%;
+    margin: 0;    
 }
 
 
 .app {
+    /* max-width: 1440px;
+    margin: 0 auto;
+    width: 100%; */
+    
     background-image: url(./assets/img/hintergrundbild-1.jfif) ;
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,6 +53,11 @@ nav {
     align-items: center;
 }
 
+.navbar {
+    max-width: 1440px !important; /* Begrenzung hinzugefügt */
+    margin: 0 auto !important; /* Zentriert die App auf großen Bildschirmen */
+    width: 100% !important;
+}
 
 .nav-logo {
     border-radius: 32px;
@@ -91,21 +112,18 @@ main {
 
 .header-btn-bar {
     position: relative;
-
 }
+
 
 .modal-close {
-    position: absolute;
-  top: 8px; /* Abstand von oben */
-  left: 50%; /* Startet in der horizontalen Mitte */
-  transform: translateX(-50%); /* Zentriert das Element horizontal */
+  position: absolute;
+  top: 8px; 
+  left: 50%; 
+  transform: translateX(-50%);
   height: 16px !important;
   width: 16px !important;
-  
   box-sizing: border-box;
 }
-
-
 
 
 .modal-card-img {
@@ -143,31 +161,30 @@ main {
 
 
 .capitalize {
-  text-transform: capitalize; /* Macht den ersten Buchstaben jedes Wortes groß */
+  text-transform: capitalize;
 }
 
 
-/* Inaktive Tabs: text-secondary */
 .nav-tabs .nav-link {
-  color: #6c757d !important; /* Bootstrap's $secondary-Farbe */
-  /* border-color: #78C850 !important; */
+  color: #6c757d !important;
 } 
 
 
-
 .nav-tabs .nav-link.active {
-  color: #212529 !important; /* Bootstrap's $dark-Farbe */
-  /* border-color: #78C850 !important; */
+  color: #212529 !important;
   border-bottom: 0 !important;
 }
 
 
-/* Logo-Stil und Animation */
 .loader-logo {
-  width: 80px; /* Anpassen an dein Logo */
+  width: 80px;
   height: 80px;
   border-radius: 40px;
   animation: spin 2s linear infinite;
+}
+
+.modal-header {
+    height: 64px !important;
 }
 
 
@@ -176,3 +193,29 @@ main {
   to { transform: rotate(360deg); }
 }
 
+
+@media (max-width: 480px) {
+    .container-fluid {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px;
+    }
+
+
+    .nav-link{
+        padding: 4px !important;
+        font-size: 0.8rem !important;
+    }
+
+
+    .modal-header{
+        padding: 0.5rem !important;
+    }
+
+
+    .modal-body{
+        padding: 0.5rem !important;
+    }
+}

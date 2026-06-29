@@ -19,133 +19,126 @@ function miniCardTypeOne (pokemonCard, pokemonTypeColor) {
 };
 
 
-function templateModalCard (pokemon, pokemonTypeColor,descriptionText,evolutionChain,movesDataTemplate) {
-
-    // total berechnung mit einer schleife lösen !!!
-    let total = pokemon.stats[0].base_stat + pokemon.stats[1].base_stat + pokemon.stats[2].base_stat + pokemon.stats[3].base_stat + pokemon.stats[4].base_stat + pokemon.stats[5].base_stat;
-    let maxStat = 255;
-    let maxStatTotal = 720;
-    let typesHtml = filterTypes(pokemon);
-    return `
-        <section class="card border rounded-3 border-5 w-100 h-100" style="background-color: ${pokemonTypeColor};">
-          
-            <div class="modal-header dpf-sb-center">
-                <div class="dpf-fe-center p-2 modal-close">
-                    <button type="button" class="btn-close p-1" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>                  
-                <img src="./assets/icons/pokemon-type-icons-main/${pokemon.types[0].type.name}.svg" alt="" class="type-logo-mini border rounded-pill px-0 py-0 m-0">                                
-                <div class="dpf-sb-center">                        
-                    <button class="btn" onclick="pokemonBack()" aria-label="Image back button" tabindex="0"> < </button>                 
-                    <h1 class="modal-title fs-5 m-0 capitalize" id="exampleModalLabel">${pokemon.name}</h1>
-                    <button class="btn" onclick="pokemonBefore()" aria-label="Image Before button" tabindex="0"> > </button>
-                </div>
-                <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemon.id}</p>                           
+function templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolutionChain, movesDataTemplate) {
+  let total = pokemon.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
+  let maxStat = 255;
+  let maxStatTotal = 720;
+  let typesHtml = filterTypes(pokemon);
+  return `
+    <div class="card border rounded-3 border-5 w-100 h-100" style="background-color: ${pokemonTypeColor};">
+      <div class="modal-header dpf-sb-center">
+        <button type="button" class="btn-close position-absolute top-0 start-50 translate-middle-x m-0 rounded-5 rounded-top-0 bg-white border border-2 border-dark" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.6rem; padding: 0.3rem; z-index: 10;"></button>
+        <img src="./assets/icons/pokemon-type-icons-main/${pokemon.types[0].type.name}.svg" alt="" class="type-logo-mini border rounded-pill px-0 py-0 m-0">
+        <div class="dpf-sb-center">
+        
+          <button class="btn" onclick="pokemonBack()" aria-label="Image back button" tabindex="0"> < </button>
+          <h1 class="modal-title fs-5 m-0 capitalize" id="exampleModalLabel">${pokemon.name}</h1>
+          <button class="btn" onclick="pokemonBefore()" aria-label="Image Before button" tabindex="0"> > </button>
+        </div>
+        <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemon.id}</p>
+      </div>
+      <div class="modal-body">
+        <div class="card-body text-success dpf-center border rounded-top modal-img" style="height: 200px; background-image: url(./assets/img/backgrund-img/${pokemon.types[0].type.name}.jpg);">
+          <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="modal-card-img">
+        </div>
+        <div class="card text-center dpf-flex-column-center rounded-top-0 p-2" style="height: 256px;">
+          <nav class="dpf-fs-center lh-1 h-auto w-100">
+            <div class="nav nav-tabs d-flex flex-nowrap lh-1 " id="nav-tab" role="tablist">
+              <button class="nav-link active text-dark fw-bold flex-grow-1 p-1 border-3" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
+              <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
+              <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
+              <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
             </div>
-            <div class="modal-body ">
-                <div class="card-body text-success dpf-center border rounded-top modal-img" style="height: 200px; background-image: url(./assets/img/backgrund-img/${pokemon.types[0].type.name}.jpg) ;">
-                    <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="modal-card-img">  
+          </nav>
+          <div class="tab-content d-flex flex-column flex-grow-1 w-100 m-0" id="nav-tabContent" style="min-height: 0;">
+            <div class="tab-pane fade show active w-100 lh-1 border-top border-2" id="nav-about" role="tabpanel">
+              <div class="d-flex flex-column gap-2 px-3 py-2 w-100">
+                <div class="dpf-sb-center gap-2">
+                  <p class="fw-bold">Type:</p>
+                  <div class="d-flex gap-1">${typesHtml}</div>
                 </div>
-                <div class="card text-center dpf-flex-column-center rounded-top-0 p-2" style="height: 256px;">
-                    <nav class="dpf-fs-center lh-1">
-                        <div class="nav nav-tabs d-flex" id="nav-tab lh-1" role="tablist">
-                            <button class="nav-link active text-dark fw-bold" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
-                            <button class="nav-link text-secondary fw-bold" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
-                            <button class="nav-link text-secondary fw-bold" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
-                            <button class="nav-link text-secondary fw-bold" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
-                        </div>
-                    </nav>
-                    <div class="tab-content d-flex flex-column vh-100 w-100 m-0" id="nav-tabContent">
-                        <div class="tab-pane fade show active w-100 lh-1" id="nav-about" role="tabpanel">
-                            <div class="d-flex flex-column gap-2 px-3 py-2 w-100">
-                                <div class="dpf-sb-center gap-2">
-                                    <p class="fw-bold">Type:</p>
-                                    <div class="d-flex gap-1">
-                                        ${typesHtml}                                       
-                                    </div>
-                                </div>
-                                <div class="dpf-sb-center gap-1">
-                                    <p class="fw-bold">Height:</p>
-                                    <p>${pokemon.height} m</p>
-                                </div>
-                                <div class="dpf-sb-center gap-1">
-                                    <p class="fw-bold">Weight:</p>
-                                    <p>${pokemon.weight} kg</p>
-                                </div>
-                                <div class="d-flex flex-column gap-1">
-                                    <p class="fw-bold">Description:</p>
-                                    <p class="mb-0">${descriptionText}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade w-100" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">                           
-                            <div class="dpf-flex-column-start gap-1 px-3 py-2 w-100 lh-1">                              
-                                <div class="dpf-fs-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">HP:</p>
-                                    <p class=" " style="width: 30px;"> ${pokemon.stats[0].base_stat}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-success" style="width: ${(pokemon.stats[0].base_stat / maxStat) * 100}%"></div>
-                                    </div>
-                                </div>                               
-                                <div class="d-flex align-items-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">Attack:</p>
-                                    <p style="width: 30px;"> ${pokemon.stats[1].base_stat}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-danger" style="width: ${(pokemon.stats[1].base_stat / maxStat) * 100}%"></div>
-                                    </div>
-                                </div>                               
-                                <div class="d-flex align-items-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">Defense:</p>
-                                    <p style="width: 30px;"> ${pokemon.stats[2].base_stat}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-primary" style="width: ${(pokemon.stats[2].base_stat / maxStat) * 100}%"></div>
-                                    </div>
-                                </div>                                   
-                                <div class="d-flex align-items-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">Sp.Atk:</p>
-                                    <p style="width: 30px;"> ${pokemon.stats[3].base_stat}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-danger-subtle" style="width: ${(pokemon.stats[3].base_stat / maxStat) * 100}%"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">Sp.Def:</p>
-                                    <p style="width: 30px;"> ${pokemon.stats[4].base_stat}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-primary-subtle" style="width: ${(pokemon.stats[4].base_stat / maxStat) * 100}%"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">Speed:</p>
-                                    <p style="width: 30px;"> ${pokemon.stats[5].base_stat}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-info" style="width: ${(pokemon.stats[5].base_stat / maxStat) * 100}%"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-1 w-100">
-                                    <p class="fw-bold text-start" style="width: 70px;">Total:</p>
-                                    <p style="width: 30px;"> ${total}</p>
-                                    <div class="progress flex-grow-1" style="height: 12px;">
-                                        <div class="progress-bar bg-warning" style="width: ${(total / maxStatTotal) * 100}%"></div>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                        <div class="tab-pane fade" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
-                            <div class="d-flex flex-column gap-2 px-3 py-2 lh-1">
-                                <div class="dpf-center gap-3 rounded p-2">
-                                    ${evolutionChain}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">   
-                            <div class="d-flex flex-column gap-2 px-3 py-2 lh-1 overflow-y-auto">
-                                <!-- Moves -->
-                                ${movesDataTemplate}                               
-                            </div>
-                        </div>
-                    </div>
-            </section>`
+                <div class="dpf-sb-center gap-1">
+                  <p class="fw-bold">Height:</p>
+                  <p>${pokemon.height / 10} m</p>
+                </div>
+                <div class="dpf-sb-center gap-1">
+                  <p class="fw-bold">Weight:</p>
+                  <p>${pokemon.weight / 10} kg</p>
+                </div>
+                <div class="d-flex flex-column gap-1">
+                  <p class="fw-bold">Description:</p>
+                  <p class="mb-0">${descriptionText}</p>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade h-100 w-100 border-top border-2" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab" tabindex="0">
+              <div class="dpf-flex-column-start gap-1 px-3 py-2 w-100 lh-1">
+                <div class="dpf-fs-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">HP:</p>
+                  <p style="width: 30px;">${pokemon.stats[0].base_stat}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-success" style="width: ${(pokemon.stats[0].base_stat / maxStat) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">Attack:</p>
+                  <p style="width: 30px;">${pokemon.stats[1].base_stat}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-danger" style="width: ${(pokemon.stats[1].base_stat / maxStat) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">Defense:</p>
+                  <p style="width: 30px;">${pokemon.stats[2].base_stat}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-primary" style="width: ${(pokemon.stats[2].base_stat / maxStat) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">Sp.Atk:</p>
+                  <p style="width: 30px;">${pokemon.stats[3].base_stat}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-danger-subtle" style="width: ${(pokemon.stats[3].base_stat / maxStat) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">Sp.Def:</p>
+                  <p style="width: 30px;">${pokemon.stats[4].base_stat}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-primary-subtle" style="width: ${(pokemon.stats[4].base_stat / maxStat) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">Speed:</p>
+                  <p style="width: 30px;">${pokemon.stats[5].base_stat}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-info" style="width: ${(pokemon.stats[5].base_stat / maxStat) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 w-100">
+                  <p class="fw-bold text-start" style="width: 70px;">Total:</p>
+                  <p style="width: 30px;">${total}</p>
+                  <div class="progress flex-grow-1" style="height: 12px;">
+                    <div class="progress-bar bg-warning" style="width: ${(total / maxStatTotal) * 100}%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade h-100 border-top border-2" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
+              <div class="d-flex flex-column gap-2 px-2 py-2 lh-1 w-100">
+                <div class="dpf-sa-center rounded">${evolutionChain}</div>
+              </div>
+            </div>
+            <div class="tab-pane fade h-100 border-top border-2" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">
+              <div class="d-flex flex-column gap-2 px-3 py-2 lh-1 h-100 overflow-y-auto ">${movesDataTemplate}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
 };
+
 
 function templateEvolutionSpecies(evolutionLineData) {
   let template = '';
@@ -170,16 +163,17 @@ function templateEvolutionSpecies(evolutionLineData) {
   return templateEvolution
 };
 
+
 function templateMoves(moveData) {
     let templateData = '';
     let moveType = " ";
     for (let index = 0; index < moveData.length; index++) { 
         moveType = moveData[index].type.name;
         templateData += ` 
-            <div class=" px-3 pt-2">
+            <div class=" px-2 pt-1">
                 <div class="dpf-flex-start mt-1" >
                     <img src="./assets/icons/pokemon-type-icons-main/${moveType}.svg" alt="${moveType}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
-                    <p class="fw-bold capitalize p-1 px-2" >${moveData[index].name}</p>
+                    <p class="fw-bold capitalize p-1 px-1" >${moveData[index].name}</p>
                     
                 </div>
                 <div class="dpf-sb-center mt-1">

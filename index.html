@@ -23,35 +23,48 @@
 <body class=" dpf-flex-column-center" onload="init()">
     <div class="app d-flex flex-column min-vh-100 min-vw-100 ">
         <div id="loader" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-black bg-opacity-50 d-none">
-        <img src="./assets/img/logo.jfif" alt="Ladeanimation" class="loader-logo">
+            <img src="./assets/img/logo.jfif" alt="Ladeanimation" class="loader-logo">
         </div>
-        <nav class="navbar bg-body-tertiary min-vw-100">
+        <nav class="navbar bg-body-tertiary min-vw-100 h-auto">
             <div class="container-fluid ">
                 <a class="navbar-brand dpf-fs-center" href="#">
                     <img src="./assets/img/header-logo.jfif" alt="" class="nav-logo">
                     <h3 class="m-0">Pokedex</h3>
-                </a>               
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" id="search_Input" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-outline-success" onclick="searchPokemon()" type="button">Search</button>
-                </form>
+                </a>
+                <form class="d-flex flex-column" role="search">
+                    <div class="d-flex">
+                        <input class="form-control me-2" id="search_Input" type="search" placeholder="Search Pokemon" >
+                        <button class="btn btn-outline-success" onclick="filterMiniCards()" type="button">Search</button>
+                    </div>
+                    
+                    <div class="position-relative card border-0"> 
+                        <div id="error_message" class="alert alert-danger p-1 position-absolute w-100 mt-1" style="display: none; z-index: 1000;">
+                        </div>
+                    </div>
+                </form>         
+               
             </div>
         </nav>
         <main class="d-flex flex-wrap gap-3 p-3 overflow-y-auto" id="mini_card">
         </main>
+
+
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog  dpf-center ">
-                <div class="modal-content dpf-center " id="modal_card" >             
+            <div class="modal-dialog dpf-center">
+                <div class="modal-content" id="modal_card">
+
                 </div>
             </div>
-        </div>      
+        </div>    
         <footer class="gap-3 p-3">
-            <div>
-                <button class="btn  btn-success" onclick="morePokemon()" aria-label="Image back button" tabindex="0"> More +10</button>
-                <button class="btn  btn-success" onclick="basePokemon()" aria-label="Image back button" tabindex="0"> Base Stack</button>
+            <div class="dpf-center gap-3">
+                <button class="btn  btn-success" onclick="morePokemon()" aria-label="more button" tabindex="0"> +10</button>
+                <button class="btn  btn-success" onclick="basePokemon()" aria-label="reset button" tabindex="0"> Base Stack</button>
+                <button class="btn  btn-success d-none" onclick="fewerPokemon()" id="fewer_button"  aria-label="fewer button" tabindex="0"> -10</button>
             </div>
         </footer>
     </div>    
 </body>
 <script src="./script.js"></script>
+
 </html>

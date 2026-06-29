@@ -5,23 +5,24 @@
 }
 
 
-/* Zentrierungs-Klassen */
 .dpf-center {
     display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
-    
+    align-items: center !important;   
 }
+
 
 .dpf-center-x {
     display: flex !important;
     justify-content: center !important;
 }
 
+
 .dpf-center-y {
     display: flex !important;
     align-items: center !important;
 }
+
 
 .dpf-fs-center {
     display: flex !important;
@@ -29,11 +30,13 @@
     align-items: center !important;
 }
 
+
 .dpf-fe-center {
     display: flex !important;
     justify-content: flex-end !important;
     align-items: center !important;
 }
+
 
 .dpf-sb-center {
     display: flex !important;
@@ -42,20 +45,26 @@
 }
 
 
+.dpf-sa-center {
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+}
 
 
-/* Ausrichtungs-Klassen für Flex-Richtung */
 .dpf-flex-start {
     display: flex !important;
     justify-content: flex-start !important;
     align-items: flex-start !important;
 }
 
+
 .dpf-flex-end {
     display: flex !important;
     justify-content: flex-end !important;
     align-items: flex-end !important;
 }
+
 
 .dpf-flex-column-center {
     display: flex !important;
@@ -64,13 +73,14 @@
     align-items: center !important;
 }
 
-/* Klassen für Flex-Richtung mit Ausrichtung */
+
 .dpf-flex-column-start {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     align-items: center !important;
 }
+
 
 .dpf-flex-column-end {
     display: flex !important;
@@ -79,12 +89,14 @@
     align-items: center !important;
 }
 
+
 .dpf-flex-row-start {
     display: flex !important;
     flex-direction: row !important;
     justify-content: flex-start !important;
     align-items: center !important;
 }
+
 
 .dpf-flex-row-end {
     display: flex !important;
