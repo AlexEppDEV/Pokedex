@@ -16,6 +16,7 @@
     height: 0; 
 }
 
+
 #error_message {
     z-index: 1050; 
     font-size: 0.8rem;
@@ -28,16 +29,11 @@ html, body {
 }
 
 
-.app {
-    /* max-width: 1440px;
-    margin: 0 auto;
-    width: 100%; */
-    
+.app {   
     background-image: url(./assets/img/hintergrundbild-1.jfif) ;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,11 +49,11 @@ nav {
     align-items: center;
 }
 
+
 .navbar {
-    max-width: 1440px !important; /* Begrenzung hinzugefügt */
-    margin: 0 auto !important; /* Zentriert die App auf großen Bildschirmen */
     width: 100% !important;
 }
+
 
 .nav-logo {
     border-radius: 32px;
@@ -82,6 +78,7 @@ nav {
     object-fit: cover;
     object-position: center;
 }
+
 
 .type-logo-mini-move {
     border-radius: 10px;

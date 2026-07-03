@@ -24,6 +24,7 @@ async function init() {
 
 
 function setupCardClickListeners() {
+  
   let cards = document.querySelectorAll('.poke-mini-card');
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', async function() {
@@ -37,6 +38,7 @@ function setupCardClickListeners() {
 function setupEventListeners() {
   let modalElement = document.getElementById('exampleModal');
   modalElement.addEventListener('hide.bs.modal', () => {
+    
     if (document.activeElement) document.activeElement.blur();
   });
   modalElement.addEventListener('hidden.bs.modal', () => {
@@ -51,20 +53,25 @@ function setupEventListeners() {
 
 
 async function loadOverviewCards() {
-  let cachedOverview = localStorage.getItem('pokemonOverview');
-  let cachedData = cachedOverview ? JSON.parse(cachedOverview) : null;
-  if (cachedData && cachedData.length === startLimitUrl) {
-    defaultPokeData = cachedData;
-    defaultPokeIndex = defaultPokeData.map(pokemon => {
-      return { name: pokemon.name, url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/` };
-    });
-    let miniCardHtml = buildCachedMiniCardsHtml(defaultPokeData);
-    document.getElementById("mini_card").innerHTML = miniCardHtml;
-  } else {
-    await fetchDateBase();
-    await renderMiniCard();
-    localStorage.setItem('pokemonOverview', JSON.stringify(defaultPokeData));
+  try {
+    document.getElementById("loader").classList.replace("d-none", "d-flex");
+    let cachedOverview = localStorage.getItem('pokemonOverview');
+    let cachedData = cachedOverview ? JSON.parse(cachedOverview) : null;
+    if (cachedData && cachedData.length === startLimitUrl) {
+      defaultPokeData = cachedData;
+      defaultPokeIndex = defaultPokeData.map(pokemon => {
+        return { name: pokemon.name, url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/` };
+      });
+      let miniCardHtml = buildCachedMiniCardsHtml(defaultPokeData);
+      document.getElementById("mini_card").innerHTML = miniCardHtml;
+    } else {
+      await fetchDateBase();
+      await renderMiniCard();
+      localStorage.setItem('pokemonOverview', JSON.stringify(defaultPokeData));
+    }
   }
+  catch (error) {console.error('Error in renderMiniCard:', error);}
+  finally {document.getElementById("loader").classList.replace("d-flex", "d-none");}
 }
 
 
@@ -90,8 +97,6 @@ async function renderMiniCard() {
   try {
     document.getElementById("loader").classList.replace("d-none", "d-flex");
     let miniCard = await buildMiniCardsHtml();
-    console.log(defaultPokeIndex)
-    console.log(defaultPokeData)
     document.getElementById("mini_card").innerHTML = miniCard;
   }
   catch (error) {console.error('Error in renderMiniCard:', error);}
@@ -134,7 +139,6 @@ async function renderModalCard(pokemonId) {
     let movesDataTemplate = templateMoves(moveData);
     let pokemonTypeColor = colorBackgroundImage[pokemon.types[0].type.name].color;
     let modalCard = templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolutionChain, movesDataTemplate);
-    // console.log(moveData);
     document.getElementById("modal_card").innerHTML = modalCard;
     bootstrap.Modal.getOrCreateInstance(document.getElementById('exampleModal')).show();
     } 
@@ -145,6 +149,7 @@ async function renderModalCard(pokemonId) {
 
 async function loadAllModalData(pokemonId) {
     try {
+      document.getElementById('modal_card').innerHTML = '';
       document.getElementById("loader").classList.replace("d-none", "d-flex");
       let cachedData = localStorage.getItem('pokemon_' + pokemonId);
       if (cachedData) {return JSON.parse(cachedData);}   
@@ -161,7 +166,7 @@ async function loadAllModalData(pokemonId) {
         };
         localStorage.setItem('pokemon_' + pokemonId, JSON.stringify(cacheData));
         return cacheData;    
-    } catch (error) {console.error('Error in renderModalCard:', error);} 
+    } catch (error) {console.error('Error in loadAllModalData:', error);} 
     finally {document.getElementById("loader").classList.replace("d-flex", "d-none");}
 };
 
@@ -179,7 +184,7 @@ async function fetchPokemon(pokemonId) {
   try {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
     if (!response.ok) {
-      throw new Error(`Pokémon ID/Name "${pokemonId}" nicht gefunden.`);
+      throw new Error(`Pokémon ID/Name "${pokemonId}" not found.`);
     }
     let dataPokemon = await response.json();
     let totalValue = 0;
@@ -208,7 +213,7 @@ async function fetchPokemon(pokemonId) {
     return defaultPokemon;
   }
    catch (error) {
-    console.error('Error fetch PokeAPI:', error);
+    console.error('Error fetchPokemon:', error);
     throw error;
   } 
 };
@@ -220,7 +225,7 @@ async function fetchSpecies(pokemonId) {
   let species = await speciesResponse.json();
   return species;  
   }
-  catch (error) {console.error('Erro fetch species PokeAPI :', error);}
+  catch (error) {console.error('Error fetchSpecies PokeAPI :', error);}
 };
 
 
@@ -231,7 +236,7 @@ async function fetchEvolutionChain(dataSpecies) {
     let evolutionData = await evolutionResponse.json();
   return evolutionData;  
   }
-  catch (error) {console.error('Erro fetchEvolutionChain :', error);}
+  catch (error) {console.error('Error fetchEvolutionChain :', error);}
 };
 
 
@@ -306,7 +311,7 @@ async function EvolutionSpecies(pokemon, dataSpecies) {
 };
 
 
-function pokemonBefore () {
+async function pokemonBefore () {
   try {
     document.getElementById("loader").classList.replace("d-none", "d-flex");
     let indexNumber = modalId;
@@ -322,7 +327,7 @@ function pokemonBefore () {
 };
 
 
-function pokemonBack () {
+async function pokemonBack () {
   try {
     document.getElementById("loader").classList.replace("d-none", "d-flex");
     let indexNumber = modalId;
