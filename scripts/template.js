@@ -1,42 +1,48 @@
-function miniCardTypeOne (pokemonCard, pokemonTypeColor) {
-    let typesHtml = filterTypes(pokemonCard);
-    return `<div class="card mb-3 poke-mini-card" style=" background-color: ${pokemonTypeColor}"  
-                data-bs-toggle="modal" 
-                data-bs-target="#exampleModal" 
-                data-id="${pokemonCard.id}">
-                <div class="card-header bg-transparent dpf-sb-center w-100">
-                    <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>
-                    <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemonCard.id}</p>
-                </div>
-                <div class="card-body text-success dpf-flex-column-center w-100">                   
-                    <img src="${pokemonCard.sprites}" alt="${pokemonCard.name}" class="mini-card-img">                   
-                     <div class="card-body dpf-sb-center gap-2">
-                        <img src="./assets/icons/pokemon-type-icons-main/${pokemonCard.types[0].type.name}.svg" alt="${pokemonCard.types[0].type.name}" class="type-logo border rounded-pill">
-                         ${typesHtml}   
-                     </div>
-                </div>              
-            </div>`
-};
+function miniCardType(pokemonCard, pokemonTypeColor) {
+  let typesHtml = filterTypes(pokemonCard);
+  return `<button class="card mb-3 poke-mini-card" style=" background-color: ${pokemonTypeColor}"  
+              onclick="renderModalCard('${pokemonCard.id}')" 
+              data-id="${pokemonCard.id}" aria-label="button ${pokemonCard.name}" alt="pokemon ${pokemonCard.name}" tabindex="0">        
+              <div class="card-header bg-transparent dpf-sb-center w-100">
+                  <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>
+                  <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemonCard.id}</p>
+              </div>
+              <div class="card-body text-success dpf-flex-column-center w-100">                   
+                  <img src="${pokemonCard.sprites}" alt="${pokemonCard.name}" class="mini-card-img">                   
+                  <div class="card-body dpf-sb-center gap-2">
+                      <img src="./assets/icons/pokemon-type-icons-main/${pokemonCard.types[0].type.name}.svg" alt="${pokemonCard.types[0].type.name}" class="type-logo border rounded-pill">
+                      ${typesHtml}   
+                  </div>
+              </div>
+            </button>`;
+}
 
-
-function templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolutionChain, movesDataTemplate) {
+function templateModalCard(
+  pokemon,
+  pokemonTypeColor,
+  descriptionText,
+  evolutionChain,
+  movesDataTemplate,
+) {
   let maxStat = 255;
   let maxStatTotal = 720;
   let typesHtml = filterTypes(pokemon);
   return `
-    <div class="card border rounded-3 border-5 w-100 h-100 " style="background-color: ${pokemonTypeColor};">
-      <div class="modal-header dpf-sb-center">
-        <button type="button" class="btn-close position-absolute top-0 start-50 translate-middle-x m-0 rounded-5 rounded-top-0 bg-white border border-2 border-dark" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.6rem; padding: 0.3rem; z-index: 10;"></button>
+    <div class="card border rounded-3 border-5 w-100 h-100" style="background-color: ${pokemonTypeColor};">
+      <div class="modal-header dpf-sb-center w-100 p-1">
+        <button type="button" onclick="closePokemonModal()" class="btn-close position-absolute top-0 start-50 translate-middle-x m-0 rounded-5 rounded-top-0 bg-white border border-2 border-dark"
+          aria-label="Close" style="font-size: 0.6rem; padding: 0.3rem; z-index: 10;">
+        </button>
         <img src="./assets/icons/pokemon-type-icons-main/${pokemon.types[0].type.name}.svg" alt="" class="type-logo-mini border rounded-pill px-0 py-0 m-0">
         <div class="dpf-sb-center">
         
-          <button class="btn" onclick="pokemonBack()" aria-label="Image back button" tabindex="0"> < </button>
+          <button class="btn" onclick="mapsPokemon('back')" aria-label="Image back button" tabindex="0"> < </button>
           <h1 class="modal-title fs-5 m-0 capitalize" id="exampleModalLabel">${pokemon.name}</h1>
-          <button class="btn" onclick="pokemonBefore()" aria-label="Image Before button" tabindex="0"> > </button>
+          <button class="btn" onclick="mapsPokemon('before')" aria-label="Image Before button" tabindex="0"> > </button>
         </div>
         <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemon.id}</p>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-1">
         <div class="card-body text-success dpf-center border rounded-top modal-img" style="height: 200px; background-image: url(./assets/img/backgrund-img/${pokemon.types[0].type.name}.jpg);">
           <img src="${pokemon.sprites}" alt="${pokemon.name}" class="modal-card-img">
         </div>
@@ -50,7 +56,7 @@ function templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolution
             </div>
           </nav>
           <div class="tab-content d-flex flex-column flex-grow-1 w-100 m-0" id="nav-tabContent" style="min-height: 0;">
-            <div class="tab-pane fade show active w-100 lh-1 border-top border-2" id="nav-about" role="tabpanel">
+            <div class="tab-pane fade show active h-100 w-100 lh-1 border-top border-2 overflow-y-auto" id="nav-about" role="tabpanel">
               <div class="d-flex flex-column gap-2 px-3 py-2 w-100">
                 <div class="dpf-sb-center gap-2">
                   <p class="fw-bold">Type:</p>
@@ -123,12 +129,12 @@ function templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolution
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade h-100 border-top border-2" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
+            <div class="tab-pane fade h-100 w-100 border-top border-2" id="nav-evolution" role="tabpanel" aria-labelledby="nav-evolution-tab" tabindex="0">
               <div class="d-flex flex-column gap-2 px-2 py-2 lh-1 w-100">
                 <div class="dpf-sa-center rounded">${evolutionChain}</div>
               </div>
             </div>
-            <div class="tab-pane fade h-100 border-top border-2" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">
+            <div class="tab-pane fade h-100 w-100 border-top border-2" id="nav-moves" role="tabpanel" aria-labelledby="nav-moves-tab" tabindex="0">
               <div class="d-flex flex-column gap-2 px-3 py-2 lh-1 h-100 overflow-y-auto ">${movesDataTemplate}</div>
             </div>
           </div>
@@ -136,13 +142,12 @@ function templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolution
       </div>
     </div>
   `;
-};
-
+}
 
 function templateEvolutionSpecies(evolutionLineData) {
-  let template = '';
-  let templateEvolution = '';
-  let evolutionName = ['Basic','Phase 1','Phase 2'];
+  let template = "";
+  let templateEvolution = "";
+  let evolutionName = ["Basic", "Phase 1", "Phase 2"];
   for (let index = 0; index < evolutionLineData.length; index++) {
     let phaseLine = evolutionName[index];
     template = `     
@@ -154,21 +159,20 @@ function templateEvolutionSpecies(evolutionLineData) {
           <p class="mb-0 capitalize">${evolutionLineData[index].name}</p>
           <p class="mb-0 ">Level: ${evolutionLineData[index].level}</p>
       </div>`;
-      templateEvolution += template;
+    templateEvolution += template;
     if (index < evolutionLineData.length - 1) {
-      templateEvolution += '→';
+      templateEvolution += "→";
     }
   }
-  return templateEvolution
-};
-
+  return templateEvolution;
+}
 
 function templateMoves(moveData) {
-    let templateData = '';
-    let moveType = " ";
-    for (let index = 0; index < moveData.length; index++) { 
-        moveType = moveData[index].type.name;
-        templateData += ` 
+  let templateData = "";
+  let moveType = " ";
+  for (let index = 0; index < moveData.length; index++) {
+    moveType = moveData[index].type.name;
+    templateData += ` 
             <div class=" px-2 pt-1">
                 <div class="dpf-flex-start mt-1" >
                     <img src="./assets/icons/pokemon-type-icons-main/${moveType}.svg" alt="${moveType}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
@@ -177,20 +181,37 @@ function templateMoves(moveData) {
                 <div class="w-100 " style="font-size: 0.9rem;">
                     <div class="d-flex justify-content-between mb-1">
                         <span class="text-secondary fw-medium">Power</span>
-                        <span class="fw-bold text-dark">${moveData[index].power || '—'}</span>
+                        <span class="fw-bold text-dark">${moveData[index].power || "—"}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-1">
                         <span class="text-secondary fw-medium">PP</span>
-                        <span class="fw-bold text-dark">${moveData[index].pp || '—'}</span>
+                        <span class="fw-bold text-dark">${moveData[index].pp || "—"}</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span class="text-secondary fw-medium">Accuracy</span>
-                        <span class="fw-bold text-dark">${moveData[index].accuracy ? moveData[index].accuracy + '%' : '—'}</span>
+                        <span class="fw-bold text-dark">${moveData[index].accuracy ? moveData[index].accuracy + "%" : "—"}</span>
                     </div>
                 </div>
                 
             </div>
         `;
   }
-  return templateData
-};
+  return templateData;
+}
+
+function filterTypes(pokemon) {
+  let pokemonTypes = "";
+  let type1 = pokemon.types[0].type.name;
+  let type2 = pokemon.types[1]?.type.name;
+  if (pokemon.types.length === 1) {
+    pokemonTypes = `
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
+    `;
+  } else {
+    pokemonTypes = `     
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type2].color};"> ${type2}</p>
+    `;
+  }
+  return pokemonTypes;
+}

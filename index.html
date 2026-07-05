@@ -1,72 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
 
-    <link rel="shortcut icon" href="./assets/img/logo.jfif" type="image/x-icon">
-    
-    <link rel="stylesheet" href="./styles/dpf-flex-utils.css">
-    <link rel="stylesheet" href="style.css">
+    <link
+      rel="shortcut icon"
+      href="./assets/img/logo.jfif"
+      type="image/x-icon"
+    />
 
-     <!-- JS -->
-     <script src="./scripts/assets.js"></script>
-     <script src="./scripts/template.js"></script>
+    <link rel="stylesheet" href="./styles/dpf-flex-utils.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JS -->
+    <script src="./scripts/assets.js"></script>
+    <script src="./scripts/template.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Bootstrap JS -->
-	<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-</head>
-<body class=" dpf-flex-column-center" onload="init()">
-    <div class="app d-flex flex-column min-vh-100 w-100 ">
-        <div id="loader" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-black bg-opacity-50 d-none">
-            <img src="./assets/img/logo.jfif" alt="Ladeanimation" class="loader-logo">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="dpf-flex-column-center" onload="init()">
+    <div class="app d-flex flex-column min-vh-100 w-100">
+      <div
+        id="loader"
+        class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-black bg-opacity-50 d-none"
+      >
+        <img
+          src="./assets/img/logo.jfif"
+          alt="Ladeanimation"
+          class="loader-logo"
+        />
+      </div>
+      <nav class="navbar bg-body-tertiary w-100 h-auto">
+        <div class="container">
+          <a class="navbar-brand dpf-fs-center" href="#">
+            <img src="./assets/img/header-logo.jfif" alt="" class="nav-logo" />
+            <h3 class="m-0">Pokedex</h3>
+          </a>
+          <form class="d-flex flex-column" role="search">
+            <div class="d-flex">
+              <input
+                class="form-control me-2"
+                id="search_Input"
+                type="search"
+                placeholder="Search Pokemon"
+              />
+              <button
+                class="btn btn-outline-success"
+                onclick="filterMiniCards()"
+                type="button"
+              >
+                Search
+              </button>
+            </div>
+            <div class="position-relative card border-0">
+              <div
+                id="error_message"
+                class="alert alert-danger p-1 position-absolute w-100 mt-1"
+                style="display: none; z-index: 1000"
+              ></div>
+            </div>
+          </form>
         </div>
-        
-            <nav class="navbar bg-body-tertiary w-100 h-auto">
-                <div class="container">
-                    <a class="navbar-brand dpf-fs-center" href="#">
-                        <img src="./assets/img/header-logo.jfif" alt="" class="nav-logo">
-                        <h3 class="m-0">Pokedex</h3>
-                    </a>
-                    <form class="d-flex flex-column" role="search">
-                        <div class="d-flex">
-                            <input class="form-control me-2" id="search_Input" type="search" placeholder="Search Pokemon" >
-                            <button class="btn btn-outline-success" onclick="filterMiniCards()" type="button">Search</button>
-                        </div>
-                        
-                        <div class="position-relative card border-0"> 
-                            <div id="error_message" class="alert alert-danger p-1 position-absolute w-100 mt-1" style="display: none; z-index: 1000;">
-                            </div>
-                        </div>
-                    </form>         
-                
-                </div>
-            </nav>
-        
-        <main class="container d-flex flex-wrap gap-3 p-3 overflow-y-auto" id="mini_card">
-        </main>
-
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog dpf-center">
-                <div class="modal-content" id="modal_card">
-
-                </div>
-            </div>
-        </div>    
-        <footer class="container gap-3 p-3">
-            <div class="dpf-center gap-3">
-                <button class="btn  btn-success" onclick="morePokemon()" aria-label="more button" tabindex="0"> +10</button>
-                <button class="btn  btn-success" onclick="basePokemon()" aria-label="reset button" tabindex="0"> Base Stack</button>
-                <button class="btn  btn-success d-none" onclick="fewerPokemon()" id="fewer_button"  aria-label="fewer button" tabindex="0"> -10</button>
-            </div>
-        </footer>
-    </div>    
-</body>
-<script src="./script.js"></script>
-
+      </nav>
+      <div class="dpf-center">
+        <h1 class="p-1">Pokedex</h1>
+      </div>
+      <main
+        class="container d-flex flex-wrap gap-3 p-3 overflow-y-auto"
+        id="mini_card"
+      ></main>
+      <dialog id="exampleModal" class="dialogCard">
+        <div id="modal_card" class=""></div>
+      </dialog>
+      <footer class="container gap-3 p-3">
+        <div class="dpf-center gap-3">
+          <button
+            class="btn btn-success"
+            onclick="changePokemonLimit('more')"
+            aria-label="more button"
+            tabindex="0"
+          >
+            +10
+          </button>
+          <button
+            class="btn btn-success"
+            onclick="changePokemonLimit('base')"
+            aria-label="reset button"
+            tabindex="0"
+          >
+            Base Stack
+          </button>
+          <button
+            class="btn btn-success d-none"
+            onclick="changePokemonLimit('fewer')"
+            id="fewer_button"
+            aria-label="fewer button"
+            tabindex="0"
+          >
+            -10
+          </button>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="./script.js"></script>
 </html>
