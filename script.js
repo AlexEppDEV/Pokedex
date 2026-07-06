@@ -9,17 +9,21 @@ let dialogRef = document.getElementById('exampleModal');
 
 async function init() {
   try {
-    document.getElementById("loader").classList.replace("d-none", "d-flex");
+    toggleLoader(true);
     await loadOverviewCards();
     setupCardClickListeners();
     setupEventListeners();
   }
   catch (error) {
-    console.error('Error onload init:', error);
-  }
+    console.error('Error onload init:', error);}
   finally {
-    document.getElementById("loader").classList.replace("d-flex", "d-none");
-  }
+  toggleLoader(false);}
+}
+
+function toggleLoader(show) {
+  let loader = document.getElementById("loader");
+  if (show) loader.classList.replace("d-none", "d-flex");
+  else loader.classList.replace("d-flex", "d-none");
 }
 
 function setupCardClickListeners() {
@@ -38,34 +42,43 @@ function setupEventListeners() {
   searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') e.preventDefault();
   });
-
   dialogRef.addEventListener("click", function(event) {
-    if (event.target === dialogRef) {
-        dialogClose();
-    }
+    if (event.target === dialogRef) {toggleDialog();}
 });
+};
+
+function toggleDialog() {
+  dialogRef.classList.toggle('opened')
+  if (dialogRef.open) {
+    dialogRef.close()
+  }
+  else {
+     dialogRef.showModal();
+  }
 };
 
 async function loadOverviewCards() {
   try {
-    document.getElementById("loader").classList.replace("d-none", "d-flex");
+    toggleLoader(true);
     let cachedOverview = localStorage.getItem('pokemonOverview');
     let cachedData = cachedOverview ? JSON.parse(cachedOverview) : null;
-    if (cachedData && cachedData.length === startLimitUrl) {
-      defaultPokeData = cachedData;
-      defaultPokeIndex = defaultPokeData.map(pokemon => {
-        return { name: pokemon.name, url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/` };
-      });
-      let miniCardHtml = buildCachedMiniCardsHtml(defaultPokeData);
-      document.getElementById("mini_card").innerHTML = miniCardHtml;
-    } else {
+    if (cachedData && cachedData.length === startLimitUrl) {loadPokemonFromCache(cachedData);} 
+    else {
       await fetchDateBase();
       await renderMiniCard();
       localStorage.setItem('pokemonOverview', JSON.stringify(defaultPokeData));
     }
-  }
-  catch (error) {console.error('Error in renderMiniCard:', error);}
-  finally {document.getElementById("loader").classList.replace("d-flex", "d-none");}
+  } catch (error) {console.error('Error in renderMiniCard:', error);}
+  finally {toggleLoader(false);}
+}
+
+function loadPokemonFromCache(cachedData) {
+  defaultPokeData = cachedData;
+  defaultPokeIndex = defaultPokeData.map(pokemon => {
+    return { name: pokemon.name, url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/` };
+  });
+  let miniCardHtml = buildCachedMiniCardsHtml(defaultPokeData);
+  document.getElementById("mini_card").innerHTML = miniCardHtml;
 }
 
 function buildCachedMiniCardsHtml(dataArray) {
@@ -86,12 +99,12 @@ async function fetchDateBase(startLimitUrl) {
 
 async function renderMiniCard() {
   try {
-    document.getElementById("loader").classList.replace("d-none", "d-flex");
+    toggleLoader(true);
     let miniCard = await buildMiniCardsHtml();
     document.getElementById("mini_card").innerHTML = miniCard;
   }
   catch (error) {console.error('Error in renderMiniCard:', error);}
-  finally {document.getElementById("loader").classList.replace("d-flex", "d-none");} 
+  finally {toggleLoader(false);} 
 };
 
 async function buildMiniCardsHtml() {
@@ -122,50 +135,43 @@ function saveToMyCards(defaultPokeData) {
 async function renderModalCard(pokemonId) {
   try {
     if (document.activeElement) document.activeElement.blur();
-    document.getElementById("loader").classList.replace("d-none", "d-flex");
+    toggleLoader(true);
     let { pokemon, descriptionText, evolutionChain, moveData } = await loadAllModalData(pokemonId);
     let movesDataTemplate = templateMoves(moveData);
     let pokemonTypeColor = colorBackgroundImage[pokemon.types[0].type.name].color;
     let modalCard = templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolutionChain, movesDataTemplate);
     document.getElementById("modal_card").innerHTML = modalCard;
-    dialogOpen();
+    if (!dialogRef.open) {toggleDialog();}
     } 
   catch (error) {console.error('Error in renderModalCard:', error);}
-  finally {document.getElementById("loader").classList.replace("d-flex", "d-none");}
+  finally {toggleLoader(false);}
 };
 
-function dialogOpen() {
-    dialogRef.showModal();        
-    dialogRef.classList.add('opened');
-}
 
-function dialogClose() {
-    dialogRef.close();                
-    dialogRef.classList.remove('opened'); 
-}
 
 async function loadAllModalData(pokemonId) {
     try {
       document.getElementById('modal_card').innerHTML = '';
-      document.getElementById("loader").classList.replace("d-none", "d-flex");
+      toggleLoader(true);
       let cachedData = localStorage.getItem('pokemon_' + pokemonId);
-      if (cachedData) {return JSON.parse(cachedData);}   
-        let pokemon = await fetchPokemon(pokemonId);
-        let dataSpecies = await fetchSpecies(pokemonId);
-        let moveData = await fetchMoveDetails(pokemon);
-        let evolutionChain = await EvolutionSpecies(pokemon, dataSpecies);
-        let descriptionText = descriptionData(dataSpecies);
-        let cacheData = { 
-          pokemon,
-          descriptionText, 
-          evolutionChain, 
-          moveData 
-        };
-        localStorage.setItem('pokemon_' + pokemonId, JSON.stringify(cacheData));
-        return cacheData;    
-    } catch (error) {console.error('Error in loadAllModalData:', error);} 
-    finally {document.getElementById("loader").classList.replace("d-flex", "d-none");}
+      if (cachedData) {return JSON.parse(cachedData);}
+      return await fetchAndCachePokemonData(pokemonId);    
+    } 
+    catch (error) {console.error('Error in loadAllModalData:', error);} 
+    finally {toggleLoader(false);}
+  };
+
+async function fetchAndCachePokemonData(pokemonId) {
+  let pokemon = await fetchPokemon(pokemonId);
+  let dataSpecies = await fetchSpecies(pokemonId);
+  let moveData = await fetchMoveDetails(pokemon);
+  let evolutionChain = await EvolutionSpecies(pokemon, dataSpecies);
+  let descriptionText = descriptionData(dataSpecies);
+  let cacheData = {pokemon, descriptionText, evolutionChain, moveData};
+  localStorage.setItem('pokemon_' + pokemonId, JSON.stringify(cacheData));
+  return cacheData;
 };
+
 
 function descriptionData(dataSpecies) {
     let description = dataSpecies.flavor_text_entries
@@ -182,33 +188,39 @@ async function fetchPokemon(pokemonId) {
       throw new Error(`Pokémon ID/Name "${pokemonId}" not found.`);
     }
     let dataPokemon = await response.json();
-    let totalValue = 0;
-    for (let i = 0; i < dataPokemon.stats.length; i++) {totalValue += dataPokemon.stats[i].base_stat; }
-    let limitedMoves = dataPokemon.moves.slice(0, 3);
-    let defaultPokemon = {
-        id: dataPokemon.id,
-        name: dataPokemon.name,
-        sprites: dataPokemon.sprites.other['official-artwork'].front_default,
-        pixelSprite: dataPokemon.sprites.front_default,
-        types: dataPokemon.types,
-        moves: limitedMoves,
-        height: dataPokemon.height,
-        weight: dataPokemon.weight,
-        stats: {
-            hp: dataPokemon.stats[0].base_stat,
-            attack: dataPokemon.stats[1].base_stat,
-            defense: dataPokemon.stats[2].base_stat,
-            spAtk: dataPokemon.stats[3].base_stat,
-            spDef: dataPokemon.stats[4].base_stat,
-            speed: dataPokemon.stats[5].base_stat,
-            total: totalValue}         
-      }; 
-    return defaultPokemon;
+    return formatPokemonData(dataPokemon);
   }
   catch (error) {console.error('Error fetchPokemon:', error);
   throw error;
   } 
 };
+
+function formatPokemonData(dataPokemon) {
+let totalValue = dataPokemon.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
+  return {
+    id: dataPokemon.id,
+    name: dataPokemon.name,
+    sprites: dataPokemon.sprites.other['official-artwork'].front_default,
+    pixelSprite: dataPokemon.sprites.front_default,
+    types: dataPokemon.types,
+    moves: dataPokemon.moves.slice(0, 3),
+    height: dataPokemon.height,
+    weight: dataPokemon.weight,
+    stats: extractStats(dataPokemon.stats, totalValue)
+  };
+}
+
+function extractStats(statsArray, total) {
+  return {
+    hp: statsArray[0].base_stat,
+    attack: statsArray[1].base_stat,
+    defense: statsArray[2].base_stat,
+    spAtk: statsArray[3].base_stat,
+    spDef: statsArray[4].base_stat,
+    speed: statsArray[5].base_stat,
+    total: total
+  };
+}
 
 async function fetchSpecies(pokemonId) {
   try {
@@ -234,21 +246,27 @@ async function fetchMoveDetails(pokemon) {
     let moveMaxNumber = Math.min(3, pokemon.moves.length);
     let movesDetails = [ ];
     for (let index = 0; index < moveMaxNumber; index++) {   
-      let dataMoveUrl = pokemon.moves[index].move.url;
-      let response = await fetch(dataMoveUrl);
-      let data = await response.json();
-      let cleanedMove = {
-        name: data.name,
-        type: {name: data.type.name},
-        power: data.power,
-        pp: data.pp,
-        accuracy: data.accuracy
-      };
-      movesDetails.push(cleanedMove) ;
-    } return movesDetails;
+      let cleanedMove = await fetchSingleMove(pokemon.moves[index].move.url);
+      movesDetails.push(cleanedMove);
+    } 
+    return movesDetails;
   } catch (error) {
     console.error("Error fetchMoveDetails:", error);
-    return [];}};
+    return [];
+  }
+}
+
+async function fetchSingleMove(url) {
+  let response = await fetch(url);
+  let data = await response.json();
+  return {
+    name: data.name,
+    type: { name: data.type.name }, 
+    power: data.power, 
+    pp: data.pp, 
+    accuracy: data.accuracy
+  };
+}
 
 async function getEvolutionChainData(current) {
   let evolutionLineData = [];
@@ -256,10 +274,8 @@ async function getEvolutionChainData(current) {
       let urlParts = current.species.url.split('/');
       let evolutionId = parseInt(urlParts[urlParts.length - 2]);
       let pokemonData = await fetchPokemon(evolutionId);
-      evolutionLineData.push({
-        id: evolutionId,
-        name: current.species.name,
-        level: current.evolution_details?.[0]?.min_level || 1,
+      evolutionLineData.push({id: evolutionId, name: current.species.name, 
+        level: current.evolution_details?.[0]?.min_level || 1, 
         imageUrl: pokemonData.pixelSprite 
       });
       current = current.evolves_to[0];
@@ -277,45 +293,55 @@ async function EvolutionSpecies(pokemon, dataSpecies) {
   }
 };
 
-async function mapsPokemon(direction) {
+function mapsPokemon(direction) {
   let indexNumber = modalId;
-  try {
-    document.getElementById("loader").classList.replace("d-none", "d-flex");
-    if (direction === 'before') {
+  if (direction === 'before') {
     if ( indexNumber >= defaultPokeIndex.length) {indexNumber = 0;}
     indexNumber = indexNumber + 1;
     } else if (direction === 'back') {
       if ( indexNumber <= 1) {indexNumber = defaultPokeIndex.length;}
       else {indexNumber = indexNumber - 1;}   
-    }
+    } 
+    updatePokemonModal(indexNumber, direction);
+}
+
+async function updatePokemonModal(indexNumber, direction) {
+   try {
+    toggleLoader(true);
     modalId = indexNumber;
     pokemonId = indexNumber.toString();
-    renderModalCard(pokemonId);
+    await renderModalCard(pokemonId);
   } catch (error) {console.error(`MapsPokemon error (${direction}):`, error);}
-    finally {document.getElementById("loader").classList.replace("d-flex", "d-none");} 
+    finally {toggleLoader(false);} 
 }
 
 async function changePokemonLimit(action) {
+  if (action === 'fewer' && startLimitUrl <= 20) {return}
   if (action === 'more') {startLimitUrl = startLimitUrl + 10;}
-  else if (action === 'base') {
-    startLimitUrl = 20;
-    document.getElementById("fewer_button").classList.replace("d-flex", "d-none");
-  } else if (action === 'fewer') {
-      if (startLimitUrl <= 20) {
-      document.getElementById("fewer_button").classList.replace( "d-flex","d-none");
-      return}
-    startLimitUrl = startLimitUrl - 10;
-  }
-  try {
-    document.getElementById("loader").classList.replace("d-none", "d-flex");    
-    if (startLimitUrl <= 20) {document.getElementById("fewer_button").classList.replace( "d-flex","d-none");}
-    else  {document.getElementById("fewer_button").classList.replace( "d-none","d-flex");}
+  else if (action === 'base') {startLimitUrl = 20;}
+  else if (action === 'fewer') {startLimitUrl = startLimitUrl - 10;}
+  await reloadPokemonData(action);
+}
+
+async function reloadPokemonData(action) {
+    try {
+    toggleLoader(true);
+    updateFewerButton(); 
       baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${startLimitUrl}&offset=0`;
       defaultPokeIndex = [];
       defaultPokeData = [];
       await init();
   } catch (error) {console.error(`changePokemonLimit error (${action}):`, error);}
-  finally {document.getElementById("loader").classList.replace("d-flex", "d-none");}   
+  finally {toggleLoader(false);} 
+}
+
+function updateFewerButton() {
+  let fewerButton = document.getElementById("fewer_button");
+  if (startLimitUrl <= 20) {
+    fewerButton.classList.replace("d-flex", "d-none");
+  } else {
+    fewerButton.classList.replace("d-none", "d-flex");
+  }
 }
 
 function resetSearch(miniCards, errorMessage) {
@@ -360,6 +386,5 @@ function filterMiniCards() {
 }
 
 function closePokemonModal() {
-    let dialog = document.getElementById('exampleModal');
-    dialog.close();
+    toggleDialog();
 }

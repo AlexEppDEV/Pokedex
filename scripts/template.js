@@ -1,5 +1,4 @@
 function miniCardType(pokemonCard, pokemonTypeColor) {
-  let typesHtml = filterTypes(pokemonCard);
   return `<button class="card mb-3 poke-mini-card" style=" background-color: ${pokemonTypeColor}"  
               onclick="renderModalCard('${pokemonCard.id}')" 
               data-id="${pokemonCard.id}" aria-label="button ${pokemonCard.name}" alt="pokemon ${pokemonCard.name}" tabindex="0">        
@@ -11,7 +10,7 @@ function miniCardType(pokemonCard, pokemonTypeColor) {
                   <img src="${pokemonCard.sprites}" alt="${pokemonCard.name}" class="mini-card-img">                   
                   <div class="card-body dpf-sb-center gap-2">
                       <img src="./assets/icons/pokemon-type-icons-main/${pokemonCard.types[0].type.name}.svg" alt="${pokemonCard.types[0].type.name}" class="type-logo border rounded-pill">
-                      ${typesHtml}   
+                      ${filterTypes(pokemonCard)}   
                   </div>
               </div>
             </button>`;
@@ -24,9 +23,6 @@ function templateModalCard(
   evolutionChain,
   movesDataTemplate,
 ) {
-  let maxStat = 255;
-  let maxStatTotal = 720;
-  let typesHtml = filterTypes(pokemon);
   return `
     <div class="card border rounded-3 border-5 w-100 h-100" style="background-color: ${pokemonTypeColor};">
       <div class="modal-header dpf-sb-center w-100 p-1">
@@ -60,7 +56,7 @@ function templateModalCard(
               <div class="d-flex flex-column gap-2 px-3 py-2 w-100">
                 <div class="dpf-sb-center gap-2">
                   <p class="fw-bold">Type:</p>
-                  <div class="d-flex gap-1">${typesHtml}</div>
+                  <div class="d-flex gap-1">${filterTypes(pokemon)}</div>
                 </div>
                 <div class="dpf-sb-center gap-1">
                   <p class="fw-bold">Height:</p>
@@ -82,49 +78,49 @@ function templateModalCard(
                   <p class="fw-bold text-start" style="width: 70px;">HP:</p>
                   <p style="width: 30px;">${pokemon.stats.hp}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-success" style="width: ${(pokemon.stats.hp / maxStat) * 100}%"></div>
+                    <div class="progress-bar bg-success" style="width: ${(pokemon.stats.hp / 255) * 100}%"></div>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-1 w-100">
                   <p class="fw-bold text-start" style="width: 70px;">Attack:</p>
                   <p style="width: 30px;">${pokemon.stats.attack}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-danger" style="width: ${(pokemon.stats.attack / maxStat) * 100}%"></div>
+                    <div class="progress-bar bg-danger" style="width: ${(pokemon.stats.attack / 255) * 100}%"></div>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-1 w-100">
                   <p class="fw-bold text-start" style="width: 70px;">Defense:</p>
                   <p style="width: 30px;">${pokemon.stats.defense}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-primary" style="width: ${(pokemon.stats.defense / maxStat) * 100}%"></div>
+                    <div class="progress-bar bg-primary" style="width: ${(pokemon.stats.defense / 255) * 100}%"></div>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-1 w-100">
                   <p class="fw-bold text-start" style="width: 70px;">Sp.Atk:</p>
                   <p style="width: 30px;">${pokemon.stats.spAtk}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-danger-subtle" style="width: ${(pokemon.stats.spAtk / maxStat) * 100}%"></div>
+                    <div class="progress-bar bg-danger-subtle" style="width: ${(pokemon.stats.spAtk / 255) * 100}%"></div>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-1 w-100">
                   <p class="fw-bold text-start" style="width: 70px;">Sp.Def:</p>
                   <p style="width: 30px;">${pokemon.stats.spDef}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-primary-subtle" style="width: ${(pokemon.stats.spDef / maxStat) * 100}%"></div>
+                    <div class="progress-bar bg-primary-subtle" style="width: ${(pokemon.stats.spDef / 255) * 100}%"></div>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-1 w-100">
                   <p class="fw-bold text-start" style="width: 70px;">Speed:</p>
                   <p style="width: 30px;">${pokemon.stats.speed}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-info" style="width: ${(pokemon.stats.speed / maxStat) * 100}%"></div>
+                    <div class="progress-bar bg-info" style="width: ${(pokemon.stats.speed / 255) * 100}%"></div>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-1 w-100">
                   <p class="fw-bold text-start" style="width: 70px;">Total:</p>
                   <p style="width: 30px;">${pokemon.stats.total}</p>
                   <div class="progress flex-grow-1" style="height: 12px;">
-                    <div class="progress-bar bg-warning" style="width: ${(pokemon.stats.total / maxStatTotal) * 100}%"></div>
+                    <div class="progress-bar bg-warning" style="width: ${(pokemon.stats.total / 720) * 100}%"></div>
                   </div>
                 </div>
               </div>
@@ -147,70 +143,72 @@ function templateModalCard(
 function templateEvolutionSpecies(evolutionLineData) {
   let template = "";
   let templateEvolution = "";
+  let phaseLine = " ";
+  let evolutionLine = " ";
   let evolutionName = ["Basic", "Phase 1", "Phase 2"];
   for (let index = 0; index < evolutionLineData.length; index++) {
-    let phaseLine = evolutionName[index];
-    template = `     
-      <div class=" dpf-flex-column-center">
-          <p class="mb-0 fw-bold">${phaseLine}</p>
-          <img src="${evolutionLineData[index].imageUrl}"
-              alt="${evolutionLineData[index].name}" class="img-fluid" style="width: 48px;">
-          <p class="mb-0 ">#${evolutionLineData[index].id}</p>
-          <p class="mb-0 capitalize">${evolutionLineData[index].name}</p>
-          <p class="mb-0 ">Level: ${evolutionLineData[index].level}</p>
-      </div>`;
+    phaseLine = evolutionName[index];
+    evolutionLine = evolutionLineData[index];
+    template = templateEvolutionBlock(evolutionLine, phaseLine);
     templateEvolution += template;
-    if (index < evolutionLineData.length - 1) {
-      templateEvolution += "→";
-    }
+    if (index < evolutionLineData.length - 1) {templateEvolution += "→";}
   }
   return templateEvolution;
+}
+
+function templateEvolutionBlock(evolutionLine, phaseLine) {
+  return `     
+      <div class=" dpf-flex-column-center">
+          <p class="mb-0 fw-bold">${phaseLine}</p>
+          <img src="${evolutionLine.imageUrl}"
+              alt="${evolutionLine.name}" class="img-fluid" style="width: 48px;">
+          <p class="mb-0 ">#${evolutionLine.id}</p>
+          <p class="mb-0 capitalize">${evolutionLine.name}</p>
+          <p class="mb-0 ">Level: ${evolutionLine.level}</p>
+      </div>`; 
 }
 
 function templateMoves(moveData) {
   let templateData = "";
   let moveType = " ";
   for (let index = 0; index < moveData.length; index++) {
-    moveType = moveData[index].type.name;
-    templateData += ` 
-            <div class=" px-2 pt-1">
-                <div class="dpf-flex-start mt-1" >
-                    <img src="./assets/icons/pokemon-type-icons-main/${moveType}.svg" alt="${moveType}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
-                    <p class="fw-bold capitalize p-1 px-1" >${moveData[index].name}</p>                 
-                </div>
-                <div class="w-100 " style="font-size: 0.9rem;">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="text-secondary fw-medium">Power</span>
-                        <span class="fw-bold text-dark">${moveData[index].power || "—"}</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="text-secondary fw-medium">PP</span>
-                        <span class="fw-bold text-dark">${moveData[index].pp || "—"}</span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span class="text-secondary fw-medium">Accuracy</span>
-                        <span class="fw-bold text-dark">${moveData[index].accuracy ? moveData[index].accuracy + "%" : "—"}</span>
-                    </div>
-                </div>
-                
-            </div>
-        `;
+    templateData += templateMovesBlock(moveData[index]);
   }
   return templateData;
 }
 
+function templateMovesBlock(moveData) {
+  return ` 
+            <div class=" px-2 pt-1">
+                <div class="dpf-flex-start mt-1" >
+                    <img src="./assets/icons/pokemon-type-icons-main/${moveData.type.name}.svg" alt="${moveData.type.name}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
+                    <p class="fw-bold capitalize p-1 px-1" >${moveData.name}</p>                 
+                </div>
+                <div class="w-100 " style="font-size: 0.9rem;">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="text-secondary fw-medium">Power</span>
+                        <span class="fw-bold text-dark">${moveData.power || "—"}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="text-secondary fw-medium">PP</span>
+                        <span class="fw-bold text-dark">${moveData.pp || "—"}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-secondary fw-medium">Accuracy</span>
+                        <span class="fw-bold text-dark">${moveData.accuracy ? moveData.accuracy + "%" : "—"}</span>
+                    </div>
+                </div>               
+            </div>
+        `;
+}
+
 function filterTypes(pokemon) {
   let pokemonTypes = "";
-  let type1 = pokemon.types[0].type.name;
-  let type2 = pokemon.types[1]?.type.name;
-  if (pokemon.types.length === 1) {
-    pokemonTypes = `
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
-    `;
-  } else {
-    pokemonTypes = `     
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type1].color};">${type1}</p>
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${colorBackgroundImage[type2].color};"> ${type2}</p>
+  for (let i = 0; i < pokemon.types.length; i++) {
+    let typeName = pokemon.types[i].type.name;
+    let typeColor = colorBackgroundImage[typeName].color;
+    pokemonTypes += `
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${typeColor};">${typeName}</p>
     `;
   }
   return pokemonTypes;
