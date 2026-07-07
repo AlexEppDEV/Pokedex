@@ -140,22 +140,6 @@ function templateModalCard(
   `;
 }
 
-function templateEvolutionSpecies(evolutionLineData) {
-  let template = "";
-  let templateEvolution = "";
-  let phaseLine = " ";
-  let evolutionLine = " ";
-  let evolutionName = ["Basic", "Phase 1", "Phase 2"];
-  for (let index = 0; index < evolutionLineData.length; index++) {
-    phaseLine = evolutionName[index];
-    evolutionLine = evolutionLineData[index];
-    template = templateEvolutionBlock(evolutionLine, phaseLine);
-    templateEvolution += template;
-    if (index < evolutionLineData.length - 1) {templateEvolution += "→";}
-  }
-  return templateEvolution;
-}
-
 function templateEvolutionBlock(evolutionLine, phaseLine) {
   return `     
       <div class=" dpf-flex-column-center">
@@ -166,15 +150,6 @@ function templateEvolutionBlock(evolutionLine, phaseLine) {
           <p class="mb-0 capitalize">${evolutionLine.name}</p>
           <p class="mb-0 ">Level: ${evolutionLine.level}</p>
       </div>`; 
-}
-
-function templateMoves(moveData) {
-  let templateData = "";
-  let moveType = " ";
-  for (let index = 0; index < moveData.length; index++) {
-    templateData += templateMovesBlock(moveData[index]);
-  }
-  return templateData;
 }
 
 function templateMovesBlock(moveData) {
@@ -200,16 +175,4 @@ function templateMovesBlock(moveData) {
                 </div>               
             </div>
         `;
-}
-
-function filterTypes(pokemon) {
-  let pokemonTypes = "";
-  for (let i = 0; i < pokemon.types.length; i++) {
-    let typeName = pokemon.types[i].type.name;
-    let typeColor = colorBackgroundImage[typeName].color;
-    pokemonTypes += `
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${typeColor};">${typeName}</p>
-    `;
-  }
-  return pokemonTypes;
 }
