@@ -78,6 +78,7 @@ async function loadOverviewCards() {
 //   return miniCardHtml;
 // }
 
+
 async function fetchDateBase(startLimitUrl) {
   let response = await fetch(baseUrl);
   let responseAsJson = await response.json();
