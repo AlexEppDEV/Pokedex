@@ -59,26 +59,6 @@ async function loadOverviewCards() {
   }
 }
 
-// function loadPokemonFromCache(cachedData) {
-//   defaultPokeData = cachedData;
-//   defaultPokeIndex = defaultPokeData.map(pokemon => {
-//     return { name: pokemon.name, url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/` };
-//   });
-//   let miniCardHtml = buildCachedMiniCardsHtml(defaultPokeData);
-//   document.getElementById("mini_card").innerHTML = miniCardHtml;
-// }
-
-// function buildCachedMiniCardsHtml(dataArray) {
-//   let miniCardHtml = " "; 
-//   for (let index = 0; index < dataArray.length; index++) {
-//     let pokemonCard = dataArray[index];
-//     let pokemonTypeColor = colorBackgroundImage[pokemonCard.types[0].type.name].color;      
-//     miniCardHtml += miniCardType(pokemonCard, pokemonTypeColor);   
-//   }
-//   return miniCardHtml;
-// }
-
-
 async function fetchDateBase(startLimitUrl) {
   let response = await fetch(baseUrl);
   let responseAsJson = await response.json();
