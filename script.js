@@ -102,7 +102,7 @@ function saveToMyCards(defaultPokeData) {
 async function fetchPokemon(pokemonId) {
     let cachedData = localStorage.getItem('pokemon_base_' + pokemonId);
     if (cachedData) {
-      return JSON.parse(cachedData);
+      return JSON.parse(cachedData).pokemon;
     }
     return await fetchPokemonFromApi(pokemonId);
 }
@@ -113,7 +113,7 @@ async function fetchPokemonFromApi(pokemonId) {
     if (!response.ok) throw new Error(`Pokémon ID/Name "${pokemonId}" not found.`);
     let data = await response.json();
     let formatted = formatPokemonData(data);
-    localStorage.setItem('pokemon_base_' + pokemonId, JSON.stringify(formatted));
+    localStorage.setItem('pokemon_data_' + pokemonId, JSON.stringify({ pokemon: formatted }));
     return formatted;
   } catch (error) {
     console.error('Error fetchPokemon:', error);

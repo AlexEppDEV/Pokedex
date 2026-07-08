@@ -13,7 +13,9 @@ function closePokemonModal() {
 
 async function renderModalCard(pokemonId) {
   try {
+
     if (document.activeElement) document.activeElement.blur();
+    document.getElementById('modal_card').innerHTML = '';
     toggleLoader(true);
     let { pokemon, descriptionText, evolutionChain, moveData } = await loadAllModalData(pokemonId);
     let movesDataTemplate = templateMoves(moveData);
@@ -26,25 +28,29 @@ async function renderModalCard(pokemonId) {
 }
 
 async function loadAllModalData(pokemonId) {
-  try {
-    document.getElementById('modal_card').innerHTML = '';
-    toggleLoader(true);
     let cachedData = localStorage.getItem('pokemon_' + pokemonId);
     if (cachedData) {return JSON.parse(cachedData);}
     return await fetchAndCachePokemonData(pokemonId);    
-  } catch (error) {console.error('Error in loadAllModalData:', error);} 
-  finally {toggleLoader(false);}
 }
 
 async function fetchAndCachePokemonData(pokemonId) {
-  let pokemon = await fetchPokemon(pokemonId);
+  let cached = localStorage.getItem('pokemon_data_' + pokemonId);
+  let baseObject = cached ? JSON.parse(cached) : { pokemon: await fetchPokemon(pokemonId) };
+
+
   let dataSpecies = await fetchSpecies(pokemonId);
-  let moveData = await fetchMoveDetails(pokemon);
-  let evolutionChain = await EvolutionSpecies(pokemon, dataSpecies);
+  let moveData = await fetchMoveDetails(baseObject.pokemon);
+  let evolutionChain = await EvolutionSpecies(baseObject.pokemon, dataSpecies);
   let descriptionText = descriptionData(dataSpecies);
-  let cacheData = {pokemon, descriptionText, evolutionChain, moveData};
-//   localStorage.setItem('pokemon_' + pokemonId, JSON.stringify(cacheData));
-  return cacheData;
+
+  baseObject.descriptionText = descriptionText;
+  baseObject.evolutionChain = evolutionChain;
+  baseObject.moveData = moveData;
+
+  // let cacheData = {pokemon, descriptionText, evolutionChain, moveData};
+  // localStorage.setItem('pokemon_' + pokemonId, JSON.stringify(cacheData));
+  localStorage.setItem('pokemon_data_' + pokemonId, JSON.stringify(baseObject));
+  return baseObject;
 }
 
 function descriptionData(dataSpecies) {
