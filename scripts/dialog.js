@@ -12,7 +12,10 @@ function closePokemonModal() {
 }
 
 async function renderModalCard(pokemonId) {
+  console.log("🔥 Klick registriert für Pokémon ID:", pokemonId);
   try {
+
+    
 
     if (document.activeElement) document.activeElement.blur();
     document.getElementById('modal_card').innerHTML = '';
@@ -28,8 +31,14 @@ async function renderModalCard(pokemonId) {
 }
 
 async function loadAllModalData(pokemonId) {
-    let cachedData = localStorage.getItem('pokemon_' + pokemonId);
-    if (cachedData) {return JSON.parse(cachedData);}
+    let cachedData = localStorage.getItem('pokemon_data_' + pokemonId);
+    if (cachedData) {
+      let parsed = JSON.parse(cachedData);
+      if (parsed.descriptionText) {
+      return parsed;
+    }
+      // return JSON.parse(cachedData);
+    }
     return await fetchAndCachePokemonData(pokemonId);    
 }
 

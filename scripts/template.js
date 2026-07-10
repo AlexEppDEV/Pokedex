@@ -1,6 +1,6 @@
 function miniCardType(pokemonCard, pokemonTypeColor) {
   return `<button class="card mb-3 poke-mini-card" style=" background-color: ${pokemonTypeColor}"  
-              onclick="renderModalCard('${pokemonCard.id}')" 
+               
               data-id="${pokemonCard.id}" aria-label="button ${pokemonCard.name}" alt="pokemon ${pokemonCard.name}" tabindex="0">        
               <div class="card-header bg-transparent dpf-sb-center w-100">
                   <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>

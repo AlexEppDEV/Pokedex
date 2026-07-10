@@ -100,7 +100,7 @@ function saveToMyCards(defaultPokeData) {
 }
 
 async function fetchPokemon(pokemonId) {
-    let cachedData = localStorage.getItem('pokemon_base_' + pokemonId);
+    let cachedData = localStorage.getItem('pokemon_data_' + pokemonId);
     if (cachedData) {
       return JSON.parse(cachedData).pokemon;
     }
@@ -163,7 +163,9 @@ async function reloadPokemonData(action) {
     baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${startLimitUrl}&offset=0`;
     defaultPokeIndex = [];
     defaultPokeData = [];
-    await init();
+    // await init();
+    await loadOverviewCards();
+    setupCardClickListeners();
   } catch (error) {console.error(`changePokemonLimit error (${action}):`, error);}
   finally {toggleLoader(false);} 
 }
