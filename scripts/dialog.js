@@ -12,11 +12,7 @@ function closePokemonModal() {
 }
 
 async function renderModalCard(pokemonId) {
-  console.log("🔥 Klick registriert für Pokémon ID:", pokemonId);
   try {
-
-    
-
     if (document.activeElement) document.activeElement.blur();
     document.getElementById('modal_card').innerHTML = '';
     toggleLoader(true);
@@ -36,8 +32,7 @@ async function loadAllModalData(pokemonId) {
       let parsed = JSON.parse(cachedData);
       if (parsed.descriptionText) {
       return parsed;
-    }
-      // return JSON.parse(cachedData);
+      }
     }
     return await fetchAndCachePokemonData(pokemonId);    
 }
@@ -45,19 +40,13 @@ async function loadAllModalData(pokemonId) {
 async function fetchAndCachePokemonData(pokemonId) {
   let cached = localStorage.getItem('pokemon_data_' + pokemonId);
   let baseObject = cached ? JSON.parse(cached) : { pokemon: await fetchPokemon(pokemonId) };
-
-
   let dataSpecies = await fetchSpecies(pokemonId);
   let moveData = await fetchMoveDetails(baseObject.pokemon);
   let evolutionChain = await EvolutionSpecies(baseObject.pokemon, dataSpecies);
   let descriptionText = descriptionData(dataSpecies);
-
   baseObject.descriptionText = descriptionText;
   baseObject.evolutionChain = evolutionChain;
   baseObject.moveData = moveData;
-
-  // let cacheData = {pokemon, descriptionText, evolutionChain, moveData};
-  // localStorage.setItem('pokemon_' + pokemonId, JSON.stringify(cacheData));
   localStorage.setItem('pokemon_data_' + pokemonId, JSON.stringify(baseObject));
   return baseObject;
 }
@@ -100,11 +89,27 @@ async function fetchMoveDetails(pokemon) {
 }
 
 async function fetchSingleMove(url) {
+  let moveUrl = url.split('/');
+  let moveId = moveUrl[moveUrl.length - 2];
+  let moveGlobal = localStorage.getItem('moves_global') ? JSON.parse(localStorage.getItem('moves_global')) : {};
+  if (moveGlobal[moveId]) {
+    return moveGlobal[moveId];
+  }
+  let moveCleaned = await fetchMoveFromApi(url);
+  moveGlobal[moveId] = moveCleaned;
+  localStorage.setItem('moves_global', JSON.stringify(moveGlobal));
+  return moveCleaned;
+}
+
+async function fetchMoveFromApi(url) {
   let response = await fetch(url);
   let data = await response.json();
   return {
-    name: data.name, type: { name: data.type.name }, 
-    power: data.power, pp: data.pp, accuracy: data.accuracy
+    name: data.name, 
+    type: { name: data.type.name }, 
+    power: data.power, 
+    pp: data.pp, 
+    accuracy: data.accuracy
   };
 }
 

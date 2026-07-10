@@ -46,7 +46,7 @@ function templateModalCard(
           <nav class="dpf-fs-center lh-1 h-auto w-100">
             <div class="nav nav-tabs d-flex flex-nowrap lh-1 " id="nav-tab" role="tablist">
               <button class="nav-link active text-dark fw-bold flex-grow-1 p-1 border-3" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="true">About</button>
-              <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Base stats</button>
+              <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-stats-tab" data-bs-toggle="tab" data-bs-target="#nav-stats" type="button" role="tab" aria-controls="nav-stats" aria-selected="false">Stats</button>
               <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-evolution-tab" data-bs-toggle="tab" data-bs-target="#nav-evolution" type="button" role="tab" aria-controls="nav-evolution" aria-selected="false">Evolution</button>
               <button class="nav-link text-secondary fw-bold flex-grow-1 p-1 border-3" id="nav-moves-tab" data-bs-toggle="tab" data-bs-target="#nav-moves" type="button" role="tab" aria-controls="nav-moves" aria-selected="false">Moves</button>
             </div>
