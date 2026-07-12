@@ -1,11 +1,11 @@
 function miniCardType(pokemonCard, pokemonTypeColor) {
   return `
           <li>
-            <button class="card mb-3 poke-mini-card" style="background-color: ${pokemonTypeColor}"       
+            <button class="card mb-3 poke-mini-card" style="background-color: ${pokemonTypeColor.color}; color: ${pokemonTypeColor.textColor};"       
                     data-id="${pokemonCard.id}" aria-label="${pokemonCard.name}, number ${pokemonCard.id}">        
                 <div class="card-header bg-transparent dpf-sb-center w-100">
-                    <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>
-                    <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemonCard.id}</p>
+                    <h5 class="fw-bold m-0 capitalize"  style="color: ${pokemonTypeColor.textColor} !important">${pokemonCard.name}</h5>
+                    <p class="border rounded-pill px-2 py-1 fw-bold m-0" style="color: ${pokemonTypeColor.textColor} !important">#${pokemonCard.id}</p>
                 </div>
                 <div class="card-body text-success dpf-flex-column-center w-100">                   
                     <img src="${pokemonCard.sprites}" alt="${pokemonCard.name}" class="mini-card-img">                   
@@ -27,19 +27,19 @@ function templateModalCard(
   movesDataTemplate,
 ) {
   return `
-    <div class="card border rounded-3 border-5 w-100 h-100" style="background-color: ${pokemonTypeColor};">
+    <div class="card border rounded-3 border-5 w-100 h-100" style="background-color: ${pokemonTypeColor.color};">
       <div class="modal-header dpf-sb-center w-100 p-1">
         <button type="button" onclick="closePokemonModal()" class="btn-close position-absolute top-0 start-50 translate-middle-x m-0 rounded-5 rounded-top-0 bg-white border border-2 border-dark"
-          aria-label="Close" style="font-size: 0.6rem; padding: 0.3rem; z-index: 10;">
+          aria-label="Close" style="font-size: 0.6rem; padding: 0.3rem; z-index: 10; color: ${pokemonTypeColor.textColor} !important">
         </button>
         <img src="./assets/icons/pokemon-type-icons-main/${pokemon.types[0].type.name}.svg" alt="" class="type-logo-mini border rounded-pill px-0 py-0 m-0">
         <div class="dpf-sb-center">
         
-          <button class="btn" onclick="mapsPokemon('back')" aria-label="Image back button" tabindex="0"> < </button>
-          <h1 class="modal-title fs-5 m-0 capitalize" id="exampleModalLabel">${pokemon.name}</h1>
-          <button class="btn" onclick="mapsPokemon('before')" aria-label="Image Before button" tabindex="0"> > </button>
+          <button class="btn" onclick="mapsPokemon('back')" aria-label="Image back" style="color: ${pokemonTypeColor.textColor} !important"> < </button>
+          <h2 class="modal-title fs-5 m-0 capitalize" id="exampleModalLabel" style="color: ${pokemonTypeColor.textColor} !important">${pokemon.name}</h2>
+          <button class="btn" onclick="mapsPokemon('before')" aria-label="Image Before" style="color: ${pokemonTypeColor.textColor} !important"> > </button>
         </div>
-        <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemon.id}</p>
+        <p class="border rounded-pill px-2 py-1 fw-bold m-0" style="color: ${pokemonTypeColor.textColor} !important">#${pokemon.id}</p>
       </div>
       <div class="modal-body p-1">
         <div class="card-body text-success dpf-center border rounded-top modal-img" style="height: 200px; background-image: url(./assets/img/backgrund-img/${pokemon.types[0].type.name}.jpg);">
@@ -157,25 +157,25 @@ function templateEvolutionBlock(evolutionLine, phaseLine) {
 
 function templateMovesBlock(moveData) {
   return ` 
-            <div class=" px-2 pt-1">
-                <div class="dpf-flex-start mt-1" >
-                    <img src="./assets/icons/pokemon-type-icons-main/${moveData.type.name}.svg" alt="${moveData.type.name}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
-                    <p class="fw-bold capitalize p-1 px-1" >${moveData.name}</p>                 
-                </div>
-                <div class="w-100 " style="font-size: 0.9rem;">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="text-secondary fw-medium">Power</span>
-                        <span class="fw-bold text-dark">${moveData.power || "—"}</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="text-secondary fw-medium">PP</span>
-                        <span class="fw-bold text-dark">${moveData.pp || "—"}</span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span class="text-secondary fw-medium">Accuracy</span>
-                        <span class="fw-bold text-dark">${moveData.accuracy ? moveData.accuracy + "%" : "—"}</span>
-                    </div>
-                </div>               
-            </div>
+          <div class=" px-2 pt-1">
+              <div class="dpf-flex-start mt-1" >
+                  <img src="./assets/icons/pokemon-type-icons-main/${moveData.type.name}.svg" alt="${moveData.type.name}" class="type-logo-mini-move border rounded-pill px-0 py-0 m-0">
+                  <p class="fw-bold capitalize p-1 px-1" >${moveData.name}</p>                 
+              </div>
+              <div class="w-100 " style="font-size: 0.9rem;">
+                  <div class="d-flex justify-content-between mb-1">
+                      <span class="text-secondary fw-medium">Power</span>
+                      <span class="fw-bold text-dark">${moveData.power || "—"}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                      <span class="text-secondary fw-medium">PP</span>
+                      <span class="fw-bold text-dark">${moveData.pp || "—"}</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <span class="text-secondary fw-medium">Accuracy</span>
+                      <span class="fw-bold text-dark">${moveData.accuracy ? moveData.accuracy + "%" : "—"}</span>
+                  </div>
+              </div>               
+          </div>
         `;
 }

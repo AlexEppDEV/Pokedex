@@ -1,78 +1,75 @@
-// pokemon type:Color and background Img
+// pokemon type:Color and font color
 const colorBackgroundImage = {
   normal: {
     color: "#A8A878",
-    backgroundImage: "background-img-normal.png",
     textColor: "#000000",
   },
   fire: {
     color: "#F08030",
-    backgroundImage: "background-img-fire.png",
+    textColor: "#000000",
   },
   water: {
     color: "#6890F0",
-    backgroundImage: "background-img-water.png",
+    textColor: "#000000",
   },
   grass: {
     color: "#78C850",
-    backgroundImage: "background-img-grass.png",
+    textColor: "#000000",
   },
   electric: {
     color: "#F8D030",
-    backgroundImage: "background-img-electric.png",
+    textColor: "#000000",
   },
   ice: {
     color: "#98D8D8",
-    backgroundImage: "background-img-ice.png",
+    textColor: "#000000",
   },
   fighting: {
     color: "#C03028",
-    backgroundImage: "background-img-fighting.png",
+    textColor: "#FFFFFF",
   },
   poison: {
     color: "#A040A0",
-    backgroundImage: "background-img-poison.png",
+    textColor: "#FFFFFF",
   },
   ground: {
     color: "#E0C068",
-    backgroundImage: "background-img-ground.png",
+     textColor: "#000000",
   },
   flying: {
     color: "#A890F0",
-    backgroundImage: "background-img-flying.png",
+     textColor: "#000000",
   },
   psychic: {
     color: "#F85888",
-    backgroundImage: "background-img-psychic.png",
+     textColor: "#000000",
   },
   bug: {
     color: "#A8B820",
-    backgroundImage: "background-img-bug.png",
+     textColor: "#000000",
   },
   rock: {
     color: "#B8A038",
-    backgroundImage: "background-img-rock.png",
+     textColor: "#000000",
   },
   ghost: {
     color: "#705898",
-    backgroundImage: "background-img-ghost.png",
+    textColor: "#FFFFFF",
   },
   dragon: {
     color: "#7038F8",
-    backgroundImage: "background-img-dragon.png",
+    textColor: "#FFFFFF",
   },
   dark: {
     color: "#705848",
-    backgroundImage: "background-img-dark.png",
+    textColor: "#FFFFFF",
   },
   steel: {
     color: "#B8B8D0",
-    backgroundImage: "background-img-steel.png",
+    textColor: "#000000",
   },
   fairy: {
     color: "#EE99AC",
-    backgroundImage: "background-img-fairy.png",
+    textColor: "#000000",
   },
 };
-
-

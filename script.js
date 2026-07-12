@@ -81,7 +81,7 @@ async function buildMiniCardsHtml() {
     let cardData = await fetchPokemon(indexId);
     defaultPokeData.push(cardData);
     let pokemonCard = defaultPokeData[index];
-    let pokemonTypeColor = colorBackgroundImage[cardData.types[0].type.name].color;      
+    let pokemonTypeColor = colorBackgroundImage[cardData.types[0].type.name];      
     miniCardHtml += miniCardType(pokemonCard, pokemonTypeColor);   
   }
   return miniCardHtml;
@@ -92,7 +92,6 @@ function saveToMyCards(defaultPokeData) {
   let alreadyExists = myCollection.some(pokemon => pokemon.id === defaultPokeData.id);
   if (!alreadyExists) {
     myCollection.push(defaultPokeData); 
-    // localStorage.setItem('myCards', JSON.stringify(myCollection));
     console.log(`${defaultPokeData.name} has been saved to your cards!`);
   } else {
     console.log(`${defaultPokeData.name} is already in your collection.`);
@@ -163,7 +162,6 @@ async function reloadPokemonData(action) {
     baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${startLimitUrl}&offset=0`;
     defaultPokeIndex = [];
     defaultPokeData = [];
-    // await init();
     await loadOverviewCards();
     setupCardClickListeners();
   } catch (error) {console.error(`changePokemonLimit error (${action}):`, error);}

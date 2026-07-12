@@ -18,7 +18,7 @@ async function renderModalCard(pokemonId) {
     toggleLoader(true);
     let { pokemon, descriptionText, evolutionChain, moveData } = await loadAllModalData(pokemonId);
     let movesDataTemplate = templateMoves(moveData);
-    let pokemonTypeColor = colorBackgroundImage[pokemon.types[0].type.name].color;
+    let pokemonTypeColor = colorBackgroundImage[pokemon.types[0].type.name];
     let modalCard = templateModalCard(pokemon, pokemonTypeColor, descriptionText, evolutionChain, movesDataTemplate);
     document.getElementById("modal_card").innerHTML = modalCard;
     if (!dialogRef.open) {toggleDialog();}
@@ -184,9 +184,9 @@ function filterTypes(pokemon) {
   let pokemonTypes = "";
   for (let i = 0; i < pokemon.types.length; i++) {
     let typeName = pokemon.types[i].type.name;
-    let typeColor = colorBackgroundImage[typeName].color;
+    let typeColor = colorBackgroundImage[typeName];
     pokemonTypes += `
-      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${typeColor};">${typeName}</p>
+      <p class="border rounded-pill px-2 py-1 fw-bold m-0 capitalize" style="background-color: ${typeColor.color}; color: ${typeColor.textColor} !important">${typeName}</p>
     `;
   }
   return pokemonTypes;
