@@ -182,7 +182,7 @@ function updateFewerButton() {
 function resetSearch(miniCards, errorMessage) {
   errorMessage.style.display = 'none';
   for (let i = 0; i < miniCards.length; i++) {
-    miniCards[i].style.display = 'block';
+    miniCards[i].parentElement.style.display = 'block';
   }
 }
 
@@ -192,7 +192,7 @@ function applySearchFilter(miniCards, searchTerm) {
     let card = miniCards[i];
     let name = card.querySelector('h5').textContent.toLowerCase();
     let matches = name.includes(searchTerm.toLowerCase());
-    card.style.display = matches ? 'block' : 'none';
+    card.parentElement.style.display = matches ? '' : 'none';
     if (matches) count++;
   }
   return count;
@@ -212,10 +212,13 @@ function filterMiniCards() {
   let searchTerm = document.getElementById('search_Input').value.trim();
   let errorMessage = document.getElementById('error_message');
   let miniCards = document.querySelectorAll('.poke-mini-card');
+  let footer = document.querySelector('footer');
   if (searchTerm.length <= 2) {
     resetSearch(miniCards, errorMessage);
+    footer.classList.remove('d-none');
     return;
   }
   let targetNumber = applySearchFilter(miniCards, searchTerm);
   handleSearchError(errorMessage, targetNumber);
+  footer.classList.add('d-none');
 }

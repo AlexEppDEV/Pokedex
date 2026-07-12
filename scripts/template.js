@@ -1,19 +1,22 @@
 function miniCardType(pokemonCard, pokemonTypeColor) {
-  return `<button class="card mb-3 poke-mini-card" style=" background-color: ${pokemonTypeColor}"  
-               
-              data-id="${pokemonCard.id}" aria-label="button ${pokemonCard.name}" alt="pokemon ${pokemonCard.name}" tabindex="0">        
-              <div class="card-header bg-transparent dpf-sb-center w-100">
-                  <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>
-                  <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemonCard.id}</p>
-              </div>
-              <div class="card-body text-success dpf-flex-column-center w-100">                   
-                  <img src="${pokemonCard.sprites}" alt="${pokemonCard.name}" class="mini-card-img">                   
-                  <div class="card-body dpf-sb-center gap-2">
-                      <img src="./assets/icons/pokemon-type-icons-main/${pokemonCard.types[0].type.name}.svg" alt="${pokemonCard.types[0].type.name}" class="type-logo border rounded-pill">
-                      ${filterTypes(pokemonCard)}   
-                  </div>
-              </div>
-            </button>`;
+  return `
+          <li>
+            <button class="card mb-3 poke-mini-card" style="background-color: ${pokemonTypeColor}"       
+                    data-id="${pokemonCard.id}" aria-label="${pokemonCard.name}, number ${pokemonCard.id}">        
+                <div class="card-header bg-transparent dpf-sb-center w-100">
+                    <h5 class="fw-bold m-0 capitalize">${pokemonCard.name}</h5>
+                    <p class="border rounded-pill px-2 py-1 fw-bold m-0">#${pokemonCard.id}</p>
+                </div>
+                <div class="card-body text-success dpf-flex-column-center w-100">                   
+                    <img src="${pokemonCard.sprites}" alt="${pokemonCard.name}" class="mini-card-img">                   
+                    <div class="card-body dpf-sb-center gap-2">
+                        <img src="./assets/icons/pokemon-type-icons-main/${pokemonCard.types[0].type.name}.svg" alt="${pokemonCard.types[0].type.name}" class="type-logo border rounded-pill">
+                        ${filterTypes(pokemonCard)}   
+                    </div>
+                </div>
+            </button>
+          </li>
+        `;
 }
 
 function templateModalCard(

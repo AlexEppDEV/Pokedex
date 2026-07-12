@@ -42,10 +42,10 @@
       </div>
       <nav class="navbar bg-body-tertiary w-100 h-auto">
         <div class="container">
-          <a class="navbar-brand dpf-fs-center" href="#">
+          <div class="navbar-brand dpf-fs-center">
             <img src="./assets/img/header-logo.jfif" alt="" class="nav-logo" />
             <h3 class="m-0">Pokedex</h3>
-          </a>
+          </div>
           <form class="d-flex flex-column" role="search">
             <div class="d-flex">
               <input
@@ -73,10 +73,11 @@
         </div>
       </nav>
       <h1 class="p-1">Pokedex</h1>
-      <main
-        class="container d-flex flex-wrap gap-3 p-3 overflow-y-auto"
-        id="mini_card"
-      ></main>
+      <main class="container dpf-center flex-wrap  overflow-y-auto">
+        <ul class="list-unstyled dpf-center flex-wrap gap-3 p-3 w-100" id="mini_card" aria-label="Pokemon-list">
+
+        </ul>
+      </main>
       <dialog id="exampleModal" class="dialogCard">
         <div id="modal_card" class=""></div>
       </dialog>
@@ -85,16 +86,14 @@
           <button
             class="btn btn-success"
             onclick="changePokemonLimit('more')"
-            aria-label="more button"
-            tabindex="0"
+            aria-label="Load 10 more Pokemon"
           >
             +10
           </button>
           <button
             class="btn btn-success"
             onclick="changePokemonLimit('base')"
-            aria-label="reset button"
-            tabindex="0"
+            aria-label="Reset to base Pokemon stack"
           >
             Base Stack
           </button>
@@ -102,8 +101,7 @@
             class="btn btn-success d-none"
             onclick="changePokemonLimit('fewer')"
             id="fewer_button"
-            aria-label="fewer button"
-            tabindex="0"
+            aria-label="Show 10 fewer Pokemon"
           >
             -10
           </button>

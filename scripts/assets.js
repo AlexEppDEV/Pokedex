@@ -3,6 +3,7 @@ const colorBackgroundImage = {
   normal: {
     color: "#A8A878",
     backgroundImage: "background-img-normal.png",
+    textColor: "#000000",
   },
   fire: {
     color: "#F08030",
@@ -73,3 +74,5 @@ const colorBackgroundImage = {
     backgroundImage: "background-img-fairy.png",
   },
 };
+
+
